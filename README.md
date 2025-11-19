@@ -7,7 +7,7 @@ A home-made [TRMNL](https://usetrmnl.com/) server that is solely driven by a sin
 The server is available as a Docker image, which you can run like so:
 
 ``` bash
-docker run -p 1992:1992 -v ./example:/data ghcr.io/lsphillips/home-trmnl
+docker run -p 1992:1992 -v ./example:/data ghcr.io/lsphillips/home-trmnl-server
 ```
 
 ### Port
@@ -68,5 +68,5 @@ Please refer to the [eslint.config.js](eslint.config.js) file to familiar yourse
 To build a Docker image, run this command:
 
 ``` bash
-docker build -t home-trmnl .
+docker build -t home-trmnl-server .
 ```
