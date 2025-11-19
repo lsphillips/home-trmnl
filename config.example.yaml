@@ -1,0 +1,112 @@
+# Type: Object, Required: Yes
+#
+# General server settings.
+settings:
+
+  # Type: String, Required: No, Default: ./screens
+  #
+  # The path to the directory where the screen images are
+  # rendered to and served from.
+  #
+  # The file path is resolved relative to the location of
+  # configuration file.
+  #
+  # The directory doesn't need to exist, it is created by
+  # the server if it does not exist.
+  screenImagePath: screens
+
+  # Type: String, Required: No, Default: https://trmnl.app/api
+  #
+  # The base URI for the TRMNL API where the server will
+  # fetch the latest firmware information.
+  #
+  # You shouldn't need to change this.
+  trmnlApiUri: https://trmnl.app/api
+
+# Type: Object, Required: Yes
+#
+# Collection of devices that the server will manage.
+devices:
+
+  - # Type: String, Required: Yes
+    #
+    # The friendly ID for the device.
+    id: test-device
+
+    # Type: String, Required: Yes
+    #
+    # The MAC address for the device.
+    address: 8A:3F:CD:91:7B:E4
+
+    # Type: String, Required: Yes
+    #
+    # The API key for the device to use in order to
+    # authenticate with the server.
+    #
+    # This needs to have a minimum length of 16 characters.
+    key: 9KJ7T2QZP1H4V8MW3RCD0XY6BNA5FGU
+
+    # Type: Array, Required: Yes
+    #
+    # The collection of screens for the device that
+    # will be cycled through.
+    screens:
+
+      - # Type: String, Required: Yes
+        #
+        # The layout indicating how the panels will be
+        # organized on screen. The available layouts are:
+        #  - P1Full
+				#  - P2L1xR1
+				#  - P2T1xB1
+				#  - P3L1xR2
+				#  - P3L2xR1
+				#  - P4Grid
+        #
+        # The PX prefix states the exact number of panels
+        # that the layout supports.
+        layout: P1Full
+
+        # Type: Array, Required: Yes
+        #
+        # The collection of panels to render on the screen.
+        panels:
+
+          # This is an example of a `join-wifi` panel.
+          - name: join-wifi
+            settings:
+
+              # Type: String, Required: Yes
+              #
+              # The SSID of the WiFi network being joined.
+              ssid: ssid
+
+              # Type: String, Required: Yes
+              #
+              # The passowrd for the WiFi network being
+              # joined.
+              password: password
+
+              # Type: String, Required: Yes
+              #
+              # The encryption type used by the WiFi
+              # network, this can be `WPA` or `WEP`.
+              encryption: WPA
+
+              # Type: String, Required: No
+              #
+              # A message to render under the WiFi QR code.
+              message: Join our Guest WiFi network
+
+# Type: Object, Required: Yes
+#
+# Admin profile settings.
+admin:
+
+  # Type: String, Required: Yes
+  #
+  # The API key that needs to be provided to the admin API
+  # endpoints.
+  #
+  # This needs to have a minimum length of 16 characters.
+  key: "Q7F3G2N8W9KJ4RT1B6ZP0XHD5C2VYMA"

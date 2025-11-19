@@ -1,0 +1,6 @@
+onlyBuiltDependencies:
+  - puppeteer
+
+registry: https://registry.npmjs.org/
+
+engineStrict: true
