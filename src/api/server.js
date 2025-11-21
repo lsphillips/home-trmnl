@@ -22,6 +22,9 @@ export async function startApiServer ({
 })
 {
 	const server = fastify({
+		routerOptions : {
+			ignoreTrailingSlash : true
+		},
 		logger : false
 	});
 
