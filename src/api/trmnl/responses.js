@@ -20,15 +20,14 @@ export function respondWithDeviceNotAuthorized (response)
 	});
 }
 
-export function respondWithDeviceSetup (response, {
-	key,
-	address
+export function respondWithDeviceSetup (response, key, {
+	id
 })
 {
 	response.code(200).send({
 		'status'      : 200,
 		'api_key'     : key,
-		'friendly_id' : address,
+		'friendly_id' : id,
 		'image_url'   : '',
 		'message'     : 'Device successfully registered.'
 	});

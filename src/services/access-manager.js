@@ -11,6 +11,11 @@ export class AccessManager
 		this.#deviceRepository = deviceRepository;
 	}
 
+	async getDeviceKey (address)
+	{
+		return this.#deviceRepository.getDeviceKey(address);
+	}
+
 	async isAuthorizedDevice (address, key)
 	{
 		if (key == null)
@@ -18,7 +23,7 @@ export class AccessManager
 			return false;
 		}
 
-		return await this.#deviceRepository.getKeyForDevice(address) === key;
+		return await this.#deviceRepository.getDeviceKey(address) === key;
 	}
 
 	async isAuthorizedAdmin (key)

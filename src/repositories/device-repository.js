@@ -73,7 +73,7 @@ export class DeviceRepository
 		};
 	}
 
-	async getKeyForDevice (address)
+	async getDeviceKey (address)
 	{
 		return this.#devices[address]?.key;
 	}

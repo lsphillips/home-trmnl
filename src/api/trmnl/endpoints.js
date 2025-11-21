@@ -35,7 +35,7 @@ export function registerTrmnlEndpoints (server, {
 
 	server.get('/api/setup', async (request, response) =>
 	{
-		log('Handling [GET] /api/setup request.');
+		log('Handling request [GET] /api/setup.');
 
 		const {
 			model,
@@ -45,22 +45,29 @@ export function registerTrmnlEndpoints (server, {
 
 		const device = await deviceManager.getDevice(address);
 
-		if (device)
+		if (!device)
 		{
-			await deviceManager.updateDeviceStatus(address, {
-				model,
-				firmware
-			});
-
-			return respondWithDeviceSetup(response, device);
+			return respondWithDeviceNotFound(response);
 		}
 
-		return respondWithDeviceNotFound(response);
+		const key = await accessManager.getDeviceKey(address);
+
+		if (!key)
+		{
+			return respondWithDeviceNotFound(response);
+		}
+
+		await deviceManager.updateDeviceStatus(address, {
+			model,
+			firmware
+		});
+
+		return respondWithDeviceSetup(response, key, device);
 	});
 
 	server.get('/api/display', async (request, response) =>
 	{
-		log('Handling [GET] /api/display request.');
+		log('Handling request [GET] /api/display.');
 
 		const {
 			model,
@@ -81,7 +88,7 @@ export function registerTrmnlEndpoints (server, {
 
 		const device = await deviceManager.getDevice(address);
 
-		if (device === null)
+		if (!device)
 		{
 			return respondWithDeviceNotFound(response);
 		}
@@ -107,7 +114,7 @@ export function registerTrmnlEndpoints (server, {
 
 	server.post('/api/log', async (request, response) =>
 	{
-		log('Handling [GET] /api/log request.');
+		log('Handling request [GET] /api/log.');
 
 		const {
 			address,
@@ -124,7 +131,7 @@ export function registerTrmnlEndpoints (server, {
 
 		const device = await deviceManager.getDevice(address);
 
-		if (device === null)
+		if (!device)
 		{
 			return respondWithDeviceNotFound(response);
 		}
