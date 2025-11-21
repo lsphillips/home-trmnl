@@ -51,7 +51,7 @@ pnpm run start
 ```
 
 > [!TIP]
-> You can set the `HOST` environment variable if you want to run the server on an alternative host. By default it runs on `localhost`.
+> You can set the `HT_HOST` environment variable if you want to run the server on an alternative host. By default it runs on `localhost`.
 
 ### Code Quality
 

@@ -16,13 +16,13 @@ const log = debug('home-trmnl:screen-renderer');
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 export async function renderToBitmapFile (html, path, {
-	width   = 800,
-	height  = 480,
-	sandbox = true
+	width          = 800,
+	height         = 480,
+	browserSandbox = true
 } = {})
 {
 	const browser = await launch({
-		args : sandbox ? [] : ['--no-sandbox', '--disable-setuid-sandbox']
+		args : browserSandbox ? [] : ['--no-sandbox', '--disable-setuid-sandbox']
 	});
 
 	const page = await browser
@@ -56,20 +56,20 @@ export async function renderToBitmapFile (html, path, {
 
 export class ScreenRenderer
 {
-	#layoutFactory    = null;
-	#panelRenderer    = null;
-	#screenImagePath  = null;
-	#sandboxRendering = true;
+	#layoutFactory   = null;
+	#panelRenderer   = null;
+	#screenImagePath = null;
+	#browserSandbox  = true;
 
-	constructor ({ screenImagePath, sandboxRendering }, {
+	constructor ({ screenImagePath, browserSandbox }, {
 		layoutFactory,
 		panelRenderer
 	})
 	{
-		this.#screenImagePath  = screenImagePath;
-		this.#sandboxRendering = sandboxRendering;
-		this.#panelRenderer    = panelRenderer;
-		this.#layoutFactory    = layoutFactory;
+		this.#screenImagePath = screenImagePath;
+		this.#browserSandbox  = browserSandbox;
+		this.#panelRenderer   = panelRenderer;
+		this.#layoutFactory   = layoutFactory;
 	}
 
 	async render (screen, {
@@ -99,9 +99,7 @@ export class ScreenRenderer
 		const file = `${screen.id}.bmp`;
 
 		await renderToBitmapFile(html, join(this.#screenImagePath, file), {
-			width,
-			height,
-			sandbox : this.#sandboxRendering
+			width, height, browserSandbox : this.#browserSandbox
 		});
 
 		log('Created screen image file `%s` that should expire in %s seconds(s).', file, expiresIn);

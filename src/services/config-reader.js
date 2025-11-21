@@ -25,26 +25,26 @@ const log = debug('home-trmnl:config-reader');
 function readEnvironmentVariables ()
 {
 	const env = {
-		host             : 'localhost',
-		sandboxRendering : true
+		host           : 'localhost',
+		browserSandbox : true
 	};
 
-	const host = process.env.HOST?.trim();
+	const host = process.env.HT_HOST?.trim();
 
 	if (host)
 	{
 		env.host = host;
 
-		log('Server host has been configured to `%s` using the HOST environment variable.', host);
+		log('Server host has been configured to `%s` using the HT_HOST environment variable.', host);
 	}
 
-	const disableSandboxRendering = process.env.DISABLE_SANDBOX_RENDERING?.trim()?.toLowerCase();
+	const disableSandboxRendering = process.env.HT_DISABLE_SANDBOX_RENDERING?.trim()?.toLowerCase();
 
 	if (disableSandboxRendering === 'true' || disableSandboxRendering === '1')
 	{
-		env.sandboxRendering = false;
+		env.browserSandbox = false;
 
-		log('Sandbox rendering has been disabled using the DISABLE_SANDBOX_RENDERING environment variable.');
+		log('Sandbox rendering has been disabled using the HT_DISABLE_SANDBOX_RENDERING environment variable.');
 	}
 
 	return env;
