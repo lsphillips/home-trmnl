@@ -43,7 +43,7 @@ export async function renderToBitmapFile (html, path, {
 	)
 		.resize(width, height)
 		.greyscale()
-		.png({ palette : true, colors : 2 })
+		.png({ palette : false, colors : 2 })
 		.toFile(path);
 }
 
