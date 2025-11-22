@@ -77,7 +77,7 @@ export class ScreenRenderer
 		height
 	})
 	{
-		const hash = Date.now();
+		const hash = Date.now().toString();
 
 		const layout = this.#layoutFactory
 			.getLayout(screen.layout);
@@ -98,7 +98,7 @@ export class ScreenRenderer
 
 		const visibleFor = screen.visibleFor;
 
-		log('Created screen image file `%s` that should be visible for %s seconds(s).', file, visibleFor);
+		log('Created screen image file `%s` that should be visible for %s second(s).', file, visibleFor);
 
 		return {
 			html,
