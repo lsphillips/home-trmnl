@@ -37,12 +37,13 @@ export function respondWithDeviceDisplay (response, update, {
 	hash,
 	expiresIn,
 	file,
-	screenImageUri
+	screenImageUri,
+	host
 })
 {
 	response.code(200).send({
 		'status'           : 0,
-		'image_url'        : posix.join(screenImageUri, file),
+		'image_url'        : host + posix.join(screenImageUri, file),
 		'filename'         : hash,
 		'refresh_rate'     : expiresIn,
 		'reset_firmware'   : false,

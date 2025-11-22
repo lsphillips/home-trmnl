@@ -5,6 +5,7 @@ const FirmwareHeader       = 'fw-version';
 const BatteryVoltageHeader = 'battery-voltage';
 const WidthHeader          = 'width';
 const HeightHeader         = 'height';
+const Host                 = 'host';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -20,7 +21,8 @@ export function readSetupRequest ({
 }
 
 export function readDisplayRequest ({
-	headers
+	headers,
+	protocol
 })
 {
 	return {
@@ -32,7 +34,8 @@ export function readDisplayRequest ({
 		address  : headers[AddressHeader],
 		width    : parseInt(headers[WidthHeader], 10),
 		height   : parseInt(headers[HeightHeader], 10),
-		key      : headers[KeyHeader]
+		key      : headers[KeyHeader],
+		host     : `${protocol}://${ headers[Host] }`
 	};
 }
 

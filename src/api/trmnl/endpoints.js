@@ -76,7 +76,8 @@ export function registerTrmnlEndpoints (server, {
 			address,
 			width,
 			height,
-			key
+			key,
+			host
 		} = readDisplayRequest(request);
 
 		const authorized = await accessManager.isAuthorizedDevice(address, key);
@@ -108,7 +109,7 @@ export function registerTrmnlEndpoints (server, {
 		const update = await deviceManager.getDeviceUpdate(address);
 
 		return respondWithDeviceDisplay(response, update, {
-			screenImageUri, ...screen
+			host, screenImageUri, ...screen
 		});
 	});
 
