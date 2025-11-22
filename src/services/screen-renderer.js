@@ -4,9 +4,7 @@ import {
 import {
 	launch
 } from 'puppeteer';
-import {
-	Jimp
-} from 'jimp';
+import sharp from 'sharp';
 import debug from 'debug';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -40,16 +38,13 @@ export async function renderToBitmapFile (html, path, {
 
 	await browser.close();
 
-	const image = await Jimp
-		.fromBuffer(
-			Buffer.from(screenshot)
-		);
-
-	await image
+	await sharp(
+		Buffer.from(screenshot)
+	)
+		.resize(width, height)
 		.greyscale()
-		.write(path, {
-			bitPP : 1
-		});
+		.png({ palette : true, colors : 2 })
+		.toFile(path);
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -90,7 +85,7 @@ export class ScreenRenderer
 			panels.map(p => p.html)
 		);
 
-		const file = `${screen.id}.bmp`;
+		const file = `${screen.id}.png`;
 
 		await renderToBitmapFile(html, join(this.#screenImagePath, file), {
 			width, height, browserSandbox : this.#browserSandbox
