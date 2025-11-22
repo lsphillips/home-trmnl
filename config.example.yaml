@@ -69,10 +69,10 @@ devices:
 
         # Type: Number, Required: No, Optional: 300
         #
-        # The number of seconds that the screen should be
-        # visible for until the TRMNL device moves to the
-        # next screen.
-        visibleFor: 300
+        # The number of seconds that the screen can
+        # be used for before it expires and the device
+        # should render the next screen.
+        expiresIn: 300
 
         # Type: Array, Required: Yes
         #

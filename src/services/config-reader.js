@@ -25,8 +25,8 @@ const log = debug('home-trmnl:config-reader');
 function readEnvironmentVariables ()
 {
 	const env = {
-		host           : 'localhost',
-		browserSandbox : true
+		host              : 'localhost',
+		useBrowserSandbox : true
 	};
 
 	const host = process.env.HT_HOST?.trim();
@@ -42,7 +42,7 @@ function readEnvironmentVariables ()
 
 	if (disableSandboxRendering === 'true' || disableSandboxRendering === '1')
 	{
-		env.browserSandbox = false;
+		env.useBrowserSandbox = false;
 
 		log('Sandbox rendering has been disabled using the HT_DISABLE_SANDBOX_RENDERING environment variable.');
 	}
@@ -84,7 +84,7 @@ export class ConfigReader
 							settings : panels[name].Schema
 						}))
 					)),
-					visibleFor : z.number().default(300)
+					expiresIn : z.number().default(300)
 				}))
 			})),
 

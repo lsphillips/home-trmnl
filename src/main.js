@@ -27,6 +27,9 @@ import {
 	PanelRenderer
 } from './services/panel-renderer.js';
 import {
+	HtmlRenderer
+} from './services/html-renderer.js';
+import {
 	AccessManager
 } from './services/access-manager.js';
 import JoinWifiPanel from './panels/join-wifi-panel.js';
@@ -72,7 +75,8 @@ async function main ()
 	const deviceManager = new DeviceManager({
 		deviceRepository, firmwareRepository, screenRenderer : new ScreenRenderer(config.settings, {
 			layoutFactory : new LayoutFactory(),
-			panelRenderer : new PanelRenderer(Panels)
+			panelRenderer : new PanelRenderer(Panels),
+			htmlRenderer  : new HtmlRenderer(config.settings)
 		})
 	});
 

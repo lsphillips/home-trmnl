@@ -1,9 +1,6 @@
 import {
 	join
 } from 'node:path';
-import {
-	launch
-} from 'puppeteer';
 import sharp from 'sharp';
 import debug from 'debug';
 
@@ -13,40 +10,21 @@ const log = debug('home-trmnl:screen-renderer');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-export async function renderToBitmapFile (html, path, {
-	width          = 800,
-	height         = 480,
-	browserSandbox = true
-} = {})
+export async function createTrmnlPng (buffer, path, {
+	width  = 800,
+	height = 480
+})
 {
-	const browser = await launch({
-		args : browserSandbox ? [] : ['--no-sandbox', '--disable-setuid-sandbox']
-	});
-
-	const page = await browser
-		.newPage();
-
-	await page.setViewport({
-		width,
-		height
-	});
-
-	await page.setContent(html);
-
-	const screenshot = await page
-		.screenshot();
-
-	await browser.close();
-
-	await sharp(
-		Buffer.from(screenshot)
-	)
+	await sharp(buffer)
 		.resize(width, height)
 		.greyscale()
 		.threshold(128)
 		.toColourspace('b-w')
 		.removeAlpha()
-		.png({ palette : false, colors : 2 })
+		.png({
+			palette : false,
+			colors  : 2
+		})
 		.toFile(path);
 }
 
@@ -56,17 +34,18 @@ export class ScreenRenderer
 {
 	#layoutFactory   = null;
 	#panelRenderer   = null;
+	#htmlRenderer    = null;
 	#screenImagePath = null;
-	#browserSandbox  = true;
 
-	constructor ({ screenImagePath, browserSandbox }, {
+	constructor ({ screenImagePath }, {
 		layoutFactory,
-		panelRenderer
+		panelRenderer,
+		htmlRenderer
 	})
 	{
 		this.#screenImagePath = screenImagePath;
-		this.#browserSandbox  = browserSandbox;
 		this.#panelRenderer   = panelRenderer;
+		this.#htmlRenderer    = htmlRenderer;
 		this.#layoutFactory   = layoutFactory;
 	}
 
@@ -75,8 +54,6 @@ export class ScreenRenderer
 		height
 	})
 	{
-		const hash = Date.now().toString();
-
 		const layout = this.#layoutFactory
 			.getLayout(screen.layout);
 
@@ -84,25 +61,32 @@ export class ScreenRenderer
 			screen.panels.map(p => this.#panelRenderer.renderPanel(p.name, p.settings))
 		);
 
+		log('Rendering %s x %s screen using layout `%s`.', width, height, screen.layout);
+
 		const html = layout(
 			panels.map(p => p.html)
 		);
 
-		const file = `${screen.id}.png`;
-
-		await renderToBitmapFile(html, join(this.#screenImagePath, file), {
-			width, height, browserSandbox : this.#browserSandbox
+		const view = await this.#htmlRenderer.render(html, {
+			width,
+			height
 		});
 
-		const visibleFor = screen.visibleFor;
+		log('Converting screen to TRMNL compliant PNG image.');
 
-		log('Created screen image file `%s` that should be visible for %s second(s).', file, visibleFor);
+		const file = `${screen.id}.png`;
+
+		await createTrmnlPng(view, join(this.#screenImagePath, file), {
+			width,
+			height
+		});
+
+		log('Finished Created screen image file `%s` that should be visible for %s second(s).', file, screen.expiresIn);
+
+		const hash = Date.now().toString();
 
 		return {
-			html,
-			visibleFor,
-			hash,
-			file
+			html, hash, file, expiresIn : screen.expiresIn
 		};
 	}
 }
