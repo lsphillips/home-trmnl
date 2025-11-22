@@ -90,24 +90,19 @@ export class ScreenRenderer
 			panels.map(p => p.html)
 		);
 
-		const error = panels.reduce((acc, p) => acc && p.error);
-
-		const expiresIn = Math.min(
-			...panels.map(p => p.expiresIn)
-		);
-
 		const file = `${screen.id}.bmp`;
 
 		await renderToBitmapFile(html, join(this.#screenImagePath, file), {
 			width, height, browserSandbox : this.#browserSandbox
 		});
 
-		log('Created screen image file `%s` that should expire in %s seconds(s).', file, expiresIn);
+		const visibleFor = screen.visibleFor;
+
+		log('Created screen image file `%s` that should be visible for %s seconds(s).', file, visibleFor);
 
 		return {
 			html,
-			expiresIn,
-			error,
+			visibleFor,
 			hash,
 			file
 		};

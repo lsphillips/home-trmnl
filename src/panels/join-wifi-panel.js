@@ -99,7 +99,7 @@ export default class JoinWifiPanel extends Panel
 		</div>`;
 
 		return {
-			html, expiresIn : 0, error : false
+			html, error : false
 		};
 	}
 }

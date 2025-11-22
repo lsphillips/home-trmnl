@@ -49,7 +49,7 @@ function renderErrorPanel ()
 	</div>`;
 
 	return {
-		html, expiresIn : 0, error : true
+		html, error : true
 	};
 }
 

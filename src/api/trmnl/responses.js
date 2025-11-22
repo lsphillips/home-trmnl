@@ -35,21 +35,22 @@ export function respondWithDeviceSetup (response, key, {
 
 export function respondWithDeviceDisplay (response, update, {
 	hash,
-	expiresIn,
+	visibleFor,
 	file,
 	screenImageUri,
 	host
 })
 {
 	response.code(200).send({
-		'status'           : 0,
-		'image_url'        : host + posix.join(screenImageUri, file),
-		'filename'         : hash,
-		'refresh_rate'     : expiresIn,
-		'reset_firmware'   : false,
-		'update_firmware'  : update !== null,
-		'firmware_url'     : update === null ? '' : update.url,
-		'special_function' : 'rewind'
+		'status'            : 0,
+		'image_url'         : host + posix.join(screenImageUri, file),
+		'image_url_timeout' : 5,
+		'filename'          : hash,
+		'refresh_rate'      : visibleFor,
+		'reset_firmware'    : false,
+		'update_firmware'   : update !== null,
+		'firmware_url'      : update === null ? '' : update.url,
+		'special_function'  : 'rewind'
 	});
 }
 

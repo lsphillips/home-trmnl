@@ -83,7 +83,8 @@ export class ConfigReader
 							name     : z.literal(name),
 							settings : panels[name].Schema
 						}))
-					))
+					)),
+					visibleFor : z.number().default(300)
 				}))
 			})),
 
