@@ -26,9 +26,11 @@ export class HtmlRenderer
 		height
 	})
 	{
-		if (this.#browser === null)
+		if (!this.#browser?.connected)
 		{
-			log('Browser not yet running, starting.');
+			log('Browser not started or is not connected.');
+
+			await this.#browser?.close();
 
 			this.#browser = await launch({
 				args : this.#useBrowserSandbox ? [] : ['--no-sandbox', '--disable-setuid-sandbox']
