@@ -15,10 +15,67 @@ export async function createTrmnlPng (buffer, path, {
 	height = 480
 })
 {
-	await sharp(buffer)
+	function clamp (value)
+	{
+		if (value < 0)
+		{
+			return 0;
+		}
+
+		return value > 255 ? 255 : value;
+	}
+
+	const {
+		data
+	} = await sharp(buffer)
 		.resize(width, height)
 		.greyscale()
-		.threshold(128)
+		.raw()
+		.toBuffer({
+			resolveWithObject : true
+		});
+
+	// Apply Floyd Steinberg Dither.
+	for (let y = 0; y < height; y++)
+	{
+		for (let x = 0; x < width; x++)
+		{
+			const index    = (y * width) + x;
+			const oldPixel = data[index];
+			const newPixel = oldPixel < 128 ? 0 : 255;
+			const error    = oldPixel - newPixel;
+
+			data[index] = newPixel;
+
+			if (x + 1 < width)
+			{
+				const pos = index + 1;
+				data[pos] = clamp(data[pos] + (error * (7 / 16)));
+			}
+
+			if (y + 1 < height && x - 1 >= 0)
+			{
+				const pos = index + width - 1;
+				data[pos] = clamp(data[pos] + (error * (3 / 16)));
+			}
+
+			if (y + 1 < height)
+			{
+				const pos = index + width;
+				data[pos] = clamp(data[pos] + (error * (5 / 16)));
+			}
+
+			if (y + 1 < height && x + 1 < width)
+			{
+				const pos = index + width + 1;
+				data[pos] = clamp(data[pos] + (error * (1 / 16)));
+			}
+		}
+	}
+
+	await sharp(data, {
+		raw : { width, height, channels : 1 }
+	})
 		.toColourspace('b-w')
 		.removeAlpha()
 		.png({
