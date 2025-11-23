@@ -65,6 +65,7 @@ export default class JoinWifiPanel extends Panel
 					{
 						display: flex;
 						height: 100%;
+						width: 100%;
 						flex-flow: column nowrap;
 						align-items: center;
 						justify-content: center;
@@ -73,14 +74,13 @@ export default class JoinWifiPanel extends Panel
 					.join-wifi-panel__qr-code
 					{
 						display: block;
-						width: 150px;
-						height: 150px;
+						width: 35%;
+						height: auto;
 					}
 
 					.join-wifi-panel__message
 					{
-						padding: 0;
-						margin: 10px 0 0;
+						margin: 15px 0 0;
 						text-align: center;
 						font-size: 16px;
 					}
@@ -92,7 +92,7 @@ export default class JoinWifiPanel extends Panel
 				${ renderWifiQrCode(this.#network) }
 			</div>
 
-			${ this.#message ? `<p class="join-wifi-panel__message">
+			${ this.#message ? `<p class="label text--black join-wifi-panel__message">
 				${ this.#message }
 			</p>` : '' }
 
