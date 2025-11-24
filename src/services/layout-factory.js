@@ -136,14 +136,12 @@ export class LayoutFactory
 					<link rel="preconnect" href="https://fonts.googleapis.com" />
     				<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
 					<link rel="stylesheet "href="https://fonts.googleapis.com/css2?family=Inter:wght@300;350;375;400;450;600;700&display=swap" />
-					<link rel="stylesheet" href="https://usetrmnl.com/css/1.2.0/plugins.css" />
-					<script src="https://usetrmnl.com/js/1.2.0/plugins.js"></script>
+					<link rel="stylesheet" href="https://usetrmnl.com/css/latest/plugins.css" />
+					<script src="https://usetrmnl.com/js/latest/plugins.js"></script>
 				</head>
 				<body class="environment trmnl">
-					<div class="screen">
-						<div class="view view--full">
-							${ layout(panels) }
-						</div>
+					<div class="screen screen--2bit screen--og_png screen--md screen--1x">
+						${ layout(panels) }
 					</div>
 				</body>
 			</html>`;

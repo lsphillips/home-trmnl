@@ -12,7 +12,8 @@ const log = debug('home-trmnl:screen-renderer');
 
 export async function createTrmnlPng (buffer, path, {
 	width  = 800,
-	height = 480
+	height = 480,
+	colors = 2
 })
 {
 	function clamp (value)
@@ -36,6 +37,7 @@ export async function createTrmnlPng (buffer, path, {
 		});
 
 	const dithered = new Float32Array(data);
+	const delta    = 255 / (colors - 1);
 
 	// Apply Floyd Steinberg Dither.
 	for (let y = 0; y < height; y++)
@@ -44,7 +46,7 @@ export async function createTrmnlPng (buffer, path, {
 		{
 			const index    = (y * width) + x;
 			const oldPixel = dithered[index];
-			const newPixel = oldPixel < 128 ? 0 : 255;
+			const newPixel = Math.round(oldPixel / delta) * delta;
 			const error    = oldPixel - newPixel;
 
 			dithered[index] = newPixel;
@@ -80,8 +82,7 @@ export async function createTrmnlPng (buffer, path, {
 	})
 		.toColourspace('b-w')
 		.png({
-			palette : false,
-			colors  : 2
+			colors, palette : false
 		})
 		.toFile(path);
 }
@@ -126,8 +127,7 @@ export class ScreenRenderer
 		);
 
 		const view = await this.#htmlRenderer.render(html, {
-			width,
-			height
+			width, height
 		});
 
 		log('Converting screen to TRMNL compliant PNG image.');
@@ -135,8 +135,7 @@ export class ScreenRenderer
 		const file = `${screen.id}.png`;
 
 		await createTrmnlPng(view, join(this.#screenImagePath, file), {
-			width,
-			height
+			width, height, colors : 4
 		});
 
 		log('Finished Created screen image file `%s` that should be visible for %s second(s).', file, screen.expiresIn);
