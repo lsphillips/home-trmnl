@@ -5,8 +5,10 @@ function P1Full (panels)
 		throw new Error('The P1Full layout only supports rendering 1 panel.');
 	}
 
-	return `<div class="layout">
-		${ panels[0] }
+	return `<div class="view view--full">
+		<div class="layout">
+			${ panels[0] }
+		</div>
 	</div>`;
 }
 
