@@ -6,33 +6,34 @@ import {
 	startApiServer
 } from './api/server.js';
 import {
-	ConfigReader
-} from './services/config-reader.js';
-import {
 	DeviceRepository
 } from './repositories/device-repository.js';
 import {
 	FirmwareRepository
 } from './repositories/firmware-repository.js';
 import {
+	ConfigReader
+} from './core/config-reader.js';
+import {
 	DeviceManager
-} from './services/device-manager.js';
+} from './core/device-manager.js';
 import {
 	ScreenRenderer
-} from './services/screen-renderer.js';
+} from './core/screen-renderer.js';
 import {
 	LayoutFactory
-} from './services/layout-factory.js';
+} from './core/layout-factory.js';
 import {
 	PanelRenderer
-} from './services/panel-renderer.js';
+} from './core/panel-renderer.js';
 import {
 	HtmlRenderer
-} from './services/html-renderer.js';
+} from './core/html-renderer.js';
 import {
 	AccessManager
-} from './services/access-manager.js';
+} from './core/access-manager.js';
 import JoinWifiPanel from './panels/join-wifi-panel.js';
+import TubeStatusPanel from './panels/tube-status-panel.js';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -41,7 +42,8 @@ const log = debug('home-trmnl:main');
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 const Panels = {
-	'join-wifi' : JoinWifiPanel
+	'join-wifi'   : JoinWifiPanel,
+	'tube-status' : TubeStatusPanel
 };
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -

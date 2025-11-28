@@ -55,47 +55,23 @@ export default class JoinWifiPanel extends Panel
 
 	async render ()
 	{
-		const html = `<div class="join-wifi-panel">
-
+		const html = `<div class="layout layout--col join-wifi-panel">
 			<style>
-
-				@scope
-				{
-					:scope
-					{
-						display: flex;
-						height: 100%;
-						width: 100%;
-						flex-flow: column nowrap;
-						align-items: center;
-						justify-content: center;
-					}
-
-					.join-wifi-panel__qr-code
-					{
-						display: block;
-						width: 35%;
-						height: auto;
-					}
-
-					.join-wifi-panel__message
-					{
-						margin: 15px 0 0;
-						text-align: center;
-						font-size: 16px;
-					}
+				.join-wifi-panel__qr-code {
+					display: block;
+					width: 35%;
+					height: auto;
 				}
-
+				.join-wifi-panel__message {
+					margin-top: 10px;
+				}
 			</style>
-
 			<div class="join-wifi-panel__qr-code">
 				${ renderWifiQrCode(this.#network) }
 			</div>
-
 			${ this.#message ? `<p class="label text--black join-wifi-panel__message">
 				${ this.#message }
 			</p>` : '' }
-
 		</div>`;
 
 		return {

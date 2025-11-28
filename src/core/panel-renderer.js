@@ -2,6 +2,9 @@ import {
 	createHash
 } from 'node:crypto';
 import debug from 'debug';
+import {
+	problem
+} from './components/problem.js';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -9,44 +12,17 @@ const log = debug('home-trmnl:panel-renderer');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+const components = {
+	problem
+};
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 function renderErrorPanel ()
 {
-	const html = `<div class="error">
-		<style>
-			@scope
-			{
-				:scope
-				{
-					display: flex;
-					height: 100%;
-					flex-flow: column nowrap;
-					align-items: center;
-					justify-content: center;
-				}
-
-				.error__icon
-				{
-					display: block;
-					width: 100px;
-					height: 100px;
-				}
-
-				.error__message
-				{
-					padding: 0;
-					margin: 10px 0 0;
-					text-align: center;
-					font-size: 16px;
-				}
-			}
-		</style>
-		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="error__icon">
-			<path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 2H8L2 8v8l6 6h8l6-6V8zM12 8v4M12 16.02V16" />
-		</svg>
-		<p class="error__message">
-			Error occurred! <br /> Please check your server logs.
-		</p>
-	</div>`;
+	const html = problem({
+		message : 'An unexpected error occurred!'
+	});
 
 	return {
 		html, error : true
@@ -112,7 +88,9 @@ export class PanelRenderer
 
 		try
 		{
-			return await panel.render();
+			return await panel.render({
+				components
+			});
 		}
 		catch (error)
 		{

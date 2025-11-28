@@ -105,6 +105,10 @@ devices:
               # A message to render under the WiFi QR code.
               message: Join our Guest WiFi network
 
+          # This is an example of a `tfl-issues` panel.
+          - name: tube-status
+            settings: {}
+
 # Type: Object, Required: Yes
 #
 # Admin profile settings.

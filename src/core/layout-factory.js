@@ -6,9 +6,7 @@ function P1Full (panels)
 	}
 
 	return `<div class="view view--full">
-		<div class="layout">
-			${ panels[0] }
-		</div>
+		${ panels[0] }
 	</div>`;
 }
 
@@ -21,9 +19,7 @@ function P2L1xR1 (panels)
 
 	return `<div class="mashup mashup--1Lx1R">
 		${ panels.reduce((html, panel) => html + `<div class="view view--half_vertical">
-			<div class="layout">
-				${ panel }
-			</div>
+			${ panel }
 		</div>`, '') }
 	</div>`;
 }
@@ -37,9 +33,7 @@ function P2T1xB1 (panels)
 
 	return `<div class="mashup mashup--1Tx1B">
 		${ panels.reduce((html, panel) => html + `<div class="view view--half_horizontal">
-			<div class="layout">
-				${ panel }
-			</div>
+			${ panel }
 		</div>`, '') }
 	</div>`;
 }
@@ -55,14 +49,10 @@ function P3L1xR2 (panels)
 
 	return `<div class="mashup mashup--1Lx2R">
 		<div class="view view--half_vertical">
-			<div class="layout">
-				${ first }
-			</div>
+			${ first }
 		</div>
 		${ rest.reduce((html, panel) => html + `<div class="view view--quadrant">
-			<div class="layout">
-				${ panel }
-			</div>
+			${ panel }
 		</div>`, '') }
 	</div>`;
 }
@@ -78,14 +68,10 @@ function P3L2xR1 (panels)
 
 	return `<div class="mashup mashup--2Lx1R">
 		${ panels.slice(0, 1).reduce((html, panel) => html + `<div class="view view--quadrant">
-			<div class="layout">
-				${ panel }
-			</div>
+			${ panel }
 		</div>`, '') }
 		<div class="view view--half_vertical">
-			<div class="layout">
-				${ last }
-			</div>
+			${ last }
 		</div>
 	</div>`;
 }
@@ -99,9 +85,7 @@ function P4Grid (panels)
 
 	return `<div class="mashup mashup--2x2">
 		${ panels.reduce((html, panel) => html + `<div class="view view--quadrant">
-			<div class="layout">
-				${ panel }
-			</div>
+			${ panel }
 		</div>`, '') }
 	</div>`;
 }
