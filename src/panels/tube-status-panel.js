@@ -87,13 +87,16 @@ export default class TubeStatusPanel extends Panel
 				.tube-status-panel__disrupted-line-name,
 				.tube-status-panel__disrupted-line-status
 				{
+					overflow: hidden;
 					padding: 10px;
+					text-overflow: ellipsis;
+					white-space: nowrap;
 				}
 				.tube-status-pabel__disrupted-line-name--bakerloo         { background: #b26300; color: #fff }
 				.tube-status-pabel__disrupted-line-name--central          { background: #dc241f; color: #fff }
 				.tube-status-pabel__disrupted-line-name--circle           { background: #ffc80a; color: #000 }
 				.tube-status-pabel__disrupted-line-name--district         { background: #007d32; color: #fff }
-				.tube-status-pabel__disrupted-line-name--hammersmith-city { background: #f589a6; color: #000; font-size: 14px !important }
+				.tube-status-pabel__disrupted-line-name--hammersmith-city { background: #f589a6; color: #000 }
 				.tube-status-pabel__disrupted-line-name--jubilee          { background: #838d93; color: #000 }
 				.tube-status-pabel__disrupted-line-name--metropolitan     { background: #9b005b; color: #fff }
 				.tube-status-pabel__disrupted-line-name--northern         { background: #000000; color: #fff }
