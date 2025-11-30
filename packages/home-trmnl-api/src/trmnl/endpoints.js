@@ -15,21 +15,19 @@ import {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-const log = debug('home-trmnl:api');
+const log = debug('home-trmnl:api:trmnl');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 export function registerTrmnlEndpoints (server, {
-	screenImagePath
-}, {
-	deviceManager,
-	accessManager
+	devices,
+	screens
 })
 {
 	const screenImageUri = '/screens';
 
 	server.register(fastifyStatic, {
-		root   : screenImagePath,
+		root   : screens.getRenderPath(),
 		prefix : screenImageUri
 	});
 
@@ -43,21 +41,21 @@ export function registerTrmnlEndpoints (server, {
 			address
 		} = readSetupRequest(request);
 
-		const device = await deviceManager.getDevice(address);
+		const device = await devices.getDevice(address);
 
 		if (!device)
 		{
 			return respondWithDeviceNotFound(response);
 		}
 
-		const key = await accessManager.getDeviceKey(address);
+		const key = await devices.getDeviceKey(address);
 
 		if (!key)
 		{
 			return respondWithDeviceNotFound(response);
 		}
 
-		await deviceManager.updateDeviceStatus(address, {
+		await devices.updateDeviceDetails(address, {
 			model,
 			firmware
 		});
@@ -80,36 +78,44 @@ export function registerTrmnlEndpoints (server, {
 			host
 		} = readDisplayRequest(request);
 
-		const authorized = await accessManager.isAuthorizedDevice(address, key);
+		const authorized = await devices.isDeviceAuthorized(address, key);
 
 		if (!authorized)
 		{
 			return respondWithDeviceNotAuthorized(response);
 		}
 
-		const device = await deviceManager.getDevice(address);
+		const device = await devices.getDevice(address);
 
 		if (!device)
 		{
 			return respondWithDeviceNotFound(response);
 		}
 
-		await deviceManager.updateDeviceStatus(address, {
+		const update = await devices.getDeviceUpdate(address);
+
+		await devices.updateDeviceDetails(address, {
 			model,
-			firmware,
-			voltage
+			firmware
 		});
 
-		const screen = await deviceManager
-			.renderNextDeviceScreen(address, {
+		await devices.updateDeviceBattery(address, voltage);
+
+		const screen = await devices
+			.updateDeviceToNextScreen(address);
+
+		const render = await screens
+			.renderScreen(screen, {
 				width,
 				height
 			});
 
-		const update = await deviceManager.getDeviceUpdate(address);
+		await devices.updateDeviceStatus(address, {
+			error : render.error
+		});
 
 		return respondWithDeviceDisplay(response, update, {
-			host, screenImageUri, ...screen
+			...render, host, screenImageUri
 		});
 	});
 
@@ -123,21 +129,21 @@ export function registerTrmnlEndpoints (server, {
 			logs
 		} = readLogRequest(request);
 
-		const authorized = await accessManager.isAuthorizedDevice(address, key);
+		const authorized = await devices.isAuthorizedDevice(address, key);
 
 		if (!authorized)
 		{
 			return respondWithDeviceNotAuthorized(response);
 		}
 
-		const device = await deviceManager.getDevice(address);
+		const device = await devices.getDevice(address);
 
 		if (!device)
 		{
 			return respondWithDeviceNotFound(response);
 		}
 
-		await deviceManager
+		await devices
 			.handleDeviceLogs(address, logs);
 
 		return respondWithDeviceLogsReceived(response);

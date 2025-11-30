@@ -1,0 +1,26 @@
+{
+    "name" : "home-trmnl-core",
+
+    "version" : "0.4.0",
+
+    "type" : "module",
+
+    "description" : "The core functionality powering Home TRMNL.",
+
+    "author" : "Luke Phillips",
+
+    "main" : "./src/index.js",
+
+    "dependencies" :
+    {
+        "puppeteer" : "24.30.0",
+        "sharp" : "0.34.5"
+    },
+
+    "engines" :
+    {
+        "node" : ">=24.0.0"
+    },
+
+    "private" : true
+}

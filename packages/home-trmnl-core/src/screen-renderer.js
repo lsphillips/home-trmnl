@@ -6,7 +6,7 @@ import debug from 'debug';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-const log = debug('home-trmnl:screen-renderer');
+const log = debug('home-trmnl:core:screen-renderer');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -108,7 +108,12 @@ export class ScreenRenderer
 		this.#layoutFactory   = layoutFactory;
 	}
 
-	async render (screen, {
+	getRenderPath ()
+	{
+		return this.#screenImagePath;
+	}
+
+	async renderScreen (screen, {
 		width,
 		height
 	})
@@ -119,6 +124,9 @@ export class ScreenRenderer
 		const panels = await Promise.all(
 			screen.panels.map(p => this.#panelRenderer.renderPanel(p.name, p.settings))
 		);
+
+		const error = panels
+			.some(panel => panel.error);
 
 		log('Rendering %s x %s screen using layout `%s`.', width, height, screen.layout);
 
@@ -143,7 +151,7 @@ export class ScreenRenderer
 		const hash = Date.now().toString();
 
 		return {
-			html, hash, file, expiresIn : screen.expiresIn
+			html, hash, file, error, expiresIn : screen.expiresIn
 		};
 	}
 }

@@ -11,22 +11,18 @@ import {
 	load
 } from 'js-yaml';
 import debug from 'debug';
-import {
-	ok,
-	fail
-} from '../utils/result.js';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-const log = debug('home-trmnl:config-reader');
+const log = debug('home-trmnl:api:config-reader');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 function readEnvironmentVariables ()
 {
 	const env = {
-		host              : 'localhost',
-		useBrowserSandbox : true
+		host                : 'localhost',
+		useSandboxRendering : true
 	};
 
 	const host = process.env.HT_HOST?.trim();
@@ -42,7 +38,7 @@ function readEnvironmentVariables ()
 
 	if (disableSandboxRendering === 'true' || disableSandboxRendering === '1')
 	{
-		env.useBrowserSandbox = false;
+		env.useSandboxRendering = false;
 
 		log('Sandbox rendering has been disabled using the HT_DISABLE_SANDBOX_RENDERING environment variable.');
 	}
@@ -59,10 +55,6 @@ export class ConfigReader
 	constructor (panels)
 	{
 		this.#schema = z.object({
-
-			admin : z.object({
-				key : z.string().min(16)
-			}),
 
 			devices : z.array(z.object({
 				id         : z.string(),
@@ -90,7 +82,10 @@ export class ConfigReader
 
 			settings : z.object({
 				screenImagePath : z.string().default('screens'),
-				trmnlApiUri     : z.string().default('https://trmnl.app/api')
+				trmnlApiUri     : z.string().default('https://trmnl.app/api'),
+				adminApiKeys    : z.array(
+					z.string().min(16)
+				).min(1)
 			})
 		});
 	}
@@ -109,9 +104,7 @@ export class ConfigReader
 		}
 		catch
 		{
-			return fail([
-				`Could not read configuration file '${path}' as a valid YAML file.`
-			]);
+			throw new Error(`Configuration file '${path}' does not exist or is not a valid YAML file.`);
 		}
 
 		log('Parsing configuration file.');
@@ -122,11 +115,13 @@ export class ConfigReader
 		{
 			config = this.#schema.parse(file);
 		}
-		catch ({ issues })
+		catch (cause)
 		{
-			return fail(
-				issues.map(i => `${ i.message } at ${ i.path.join('.') }`)
-			);
+			cause.issues.forEach(i => `${ i.message } at ${ i.path.join('.') }`);
+
+			throw new Error(`Configuration file '${path}' is not valid.`, {
+				cause
+			});
 		}
 
 		// Ensure that the image path is an absolute path
@@ -146,6 +141,6 @@ export class ConfigReader
 			...config.settings, ...readEnvironmentVariables()
 		};
 
-		return ok(config);
+		return config;
 	}
 }

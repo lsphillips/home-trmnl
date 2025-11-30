@@ -5,20 +5,20 @@ import debug from 'debug';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-const log = debug('home-trmnl:html-renderer');
+const log = debug('home-trmnl:core:html-renderer');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 export class HtmlRenderer
 {
-	#browser           = null;
-	#useBrowserSandbox = true;
+	#browser             = null;
+	#useSandboxRendering = true;
 
 	constructor ({
 		useBrowserSandbox
 	})
 	{
-		this.#useBrowserSandbox = useBrowserSandbox;
+		this.#useSandboxRendering = useBrowserSandbox;
 	}
 
 	async render (html, {
@@ -33,7 +33,7 @@ export class HtmlRenderer
 			await this.#browser?.close();
 
 			this.#browser = await launch({
-				args : this.#useBrowserSandbox ? [] : ['--no-sandbox', '--disable-setuid-sandbox']
+				args : this.#useSandboxRendering ? [] : ['--no-sandbox', '--disable-setuid-sandbox']
 			});
 		}
 

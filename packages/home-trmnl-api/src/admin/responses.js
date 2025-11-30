@@ -15,12 +15,14 @@ export function respondWithNotAuthorized (response)
 export function respondWithDeviceStatus (response, {
 	model,
 	firmware,
-	battery
+	battery,
+	error
 })
 {
 	response.status(200).send({
 		model,
 		firmware,
-		battery
+		battery,
+		error
 	});
 }

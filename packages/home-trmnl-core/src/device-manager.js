@@ -1,7 +1,11 @@
 import debug from 'debug';
 import {
 	versionToNumber
-} from '../utils/version.js';
+} from './utils/version.js';
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+const log = debug('home-trmnl:core:device-manager');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -27,30 +31,28 @@ export function voltageToPercentage (voltage)
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-const log = debug('home-trmnl:device-manager');
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 export class DeviceManager
 {
 	#deviceRepository   = null;
 	#firmwareRepository = null;
-	#screenRenderer     = null;
 
 	constructor ({
 		deviceRepository,
-		firmwareRepository,
-		screenRenderer
+		firmwareRepository
 	})
 	{
 		this.#deviceRepository   = deviceRepository;
 		this.#firmwareRepository = firmwareRepository;
-		this.#screenRenderer     = screenRenderer;
 	}
 
 	async getDevice (address)
 	{
 		return this.#deviceRepository.getDevice(address);
+	}
+
+	async getDeviceKey (address)
+	{
+		return this.#deviceRepository.getDeviceKey(address);
 	}
 
 	async getDeviceUpdate (address)
@@ -81,28 +83,46 @@ export class DeviceManager
 		return null;
 	}
 
-	async renderNextDeviceScreen (address, size)
+	async isDeviceAuthorized (address, key)
 	{
-		const screen = await this.#deviceRepository
-			.updateToNextDeviceScreen(address);
+		if (key == null)
+		{
+			return false;
+		}
 
-		return this.#screenRenderer.render(screen, size);
+		return await this.#deviceRepository.getDeviceKey(address) === key;
+	}
+
+	async updateDeviceToNextScreen (address)
+	{
+		return this.#deviceRepository.updateDeviceToNextScreen(address);
+	}
+
+	async updateDeviceDetails (address, {
+		model,
+		firmware
+	})
+	{
+		await this.#deviceRepository.updateDevice(address, {
+			model,
+			firmware
+		});
+	}
+
+	async updateDeviceBattery (address, voltage)
+	{
+		await this.#deviceRepository.updateDevice(address, {
+			battery : voltageToPercentage(voltage)
+		});
 	}
 
 	async updateDeviceStatus (address, {
-		model,
-		firmware,
-		voltage
+		error
 	})
 	{
-		const update = { model, firmware };
-
-		if (voltage != null)
-		{
-			update.battery = voltageToPercentage(voltage);
-		}
-
-		await this.#deviceRepository.updateDeviceStatus(address, update);
+		await this.#deviceRepository.updateDevice(address, {
+			error
+		});
 	}
 
 	async handleDeviceLogs (address, logs)

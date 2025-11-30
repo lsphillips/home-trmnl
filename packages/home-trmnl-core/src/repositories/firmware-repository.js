@@ -5,7 +5,7 @@ import debug from 'debug';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-const log = debug('home-trmnl:firmware-repository');
+const log = debug('home-trmnl:core:firmware-repository');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

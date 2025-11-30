@@ -8,13 +8,7 @@ import {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-const log = debug('home-trmnl:panel-renderer');
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-const components = {
-	problem
-};
+const log = debug('home-trmnl:core:panel-renderer');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -89,7 +83,9 @@ export class PanelRenderer
 		try
 		{
 			return await panel.render({
-				components
+				components : {
+					problem
+				}
 			});
 		}
 		catch (error)

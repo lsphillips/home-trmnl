@@ -2,7 +2,7 @@ import qr from 'qr';
 import * as z from 'zod';
 import {
 	Panel
-} from './panel.js';
+} from 'home-trmnl-core';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -27,7 +27,7 @@ function renderWifiQrCode ({
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-export default class JoinWifiPanel extends Panel
+export default class JoinWifi extends Panel
 {
 	static Schema = z.object({
 		message    : z.string().optional(),
@@ -47,7 +47,7 @@ export default class JoinWifiPanel extends Panel
 	{
 		const {
 			message, ...network
-		} = JoinWifiPanel.Schema.parse(settings);
+		} = JoinWifi.Schema.parse(settings);
 
 		this.#message = message;
 		this.#network = network;

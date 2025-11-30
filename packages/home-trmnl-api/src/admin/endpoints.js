@@ -10,10 +10,16 @@ import {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 export function registerAdminEndpoints (server, {
-	deviceManager,
-	accessManager
+	devices
+}, {
+	adminApiKeys = []
 })
 {
+	function isAuthorizedAdmin (key)
+	{
+		return adminApiKeys.includes(key);
+	}
+
 	server.get('/admin/:address/status', async (request, response) =>
 	{
 		const {
@@ -21,14 +27,14 @@ export function registerAdminEndpoints (server, {
 			key
 		} = readDeviceStatusRequest(request);
 
-		const authorized = await accessManager.isAuthorizedAdmin(key);
-
-		if (!authorized)
+		if (
+			!isAuthorizedAdmin(key)
+		)
 		{
 			return respondWithNotAuthorized(response);
 		}
 
-		const device = await deviceManager.getDevice(address);
+		const device = await devices.getDevice(address);
 
 		if (!device)
 		{

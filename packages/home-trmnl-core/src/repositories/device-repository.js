@@ -5,7 +5,7 @@ import debug from 'debug';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-const log = debug('home-trmnl:device-repository');
+const log = debug('home-trmnl:core:device-repository');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -24,6 +24,7 @@ function createMemoryTable (definitions)
 			model : null,
 			firmware : null,
 			battery : 0,
+			error : false,
 			screens : screens.map(screen => ({
 				id : randomUUID(), ...screen
 			}))
@@ -60,7 +61,8 @@ export class DeviceRepository
 			model,
 			firmware,
 			battery,
-			autoUpdate
+			autoUpdate,
+			error
 		} = device;
 
 		return {
@@ -69,7 +71,8 @@ export class DeviceRepository
 			model,
 			firmware,
 			battery,
-			autoUpdate
+			autoUpdate,
+			error
 		};
 	}
 
@@ -78,7 +81,12 @@ export class DeviceRepository
 		return this.#devices[address]?.key;
 	}
 
-	async updateToNextDeviceScreen (address)
+	async getDeviceScreens (address)
+	{
+		return this.devices[address]?.screens || [];
+	}
+
+	async updateDeviceToNextScreen (address)
 	{
 		const device = this.#devices[address];
 
@@ -97,10 +105,11 @@ export class DeviceRepository
 		return device.screens[next];
 	}
 
-	async updateDeviceStatus (address, {
+	async updateDevice (address, {
 		model,
 		firmware,
-		battery
+		battery,
+		error
 	})
 	{
 		const device = this.#devices[address];
@@ -129,6 +138,13 @@ export class DeviceRepository
 			device.battery = battery;
 
 			log('Updating device, with address `%s`, to have battery level `%s`.', address, battery);
+		}
+
+		if (error != null)
+		{
+			device.error = error;
+
+			log('Updating device, with address `%s`, to have error status of `%s`.', address, error);
 		}
 	}
 }

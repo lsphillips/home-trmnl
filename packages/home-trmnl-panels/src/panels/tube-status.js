@@ -1,8 +1,8 @@
-import * as z from 'zod';
 import debug from 'debug';
+import * as z from 'zod';
 import {
 	Panel
-} from './panel.js';
+} from 'home-trmnl-core';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -43,7 +43,7 @@ async function getLinesWithDisruption ()
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-export default class TubeStatusPanel extends Panel
+export default class TubeStatus extends Panel
 {
 	static Schema = z.object({
 		// Nothing to configure.
