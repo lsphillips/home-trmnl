@@ -22,7 +22,7 @@
     },
     "scripts" :
     {
-        "start" : "node src/index.js example/config.yaml"
+        "start" : "node src/index.js ../../example/config.yaml"
     },
 
     "engines" :
