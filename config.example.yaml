@@ -23,6 +23,13 @@ settings:
   # You shouldn't need to change this.
   trmnlApiUri: https://trmnl.app/api
 
+  # Type: Array, Required: Yes
+  #
+  # A collection of API keys that will grant access to the
+  # admin API.
+  adminApiKeys:
+    - "Q7F3G2N8W9KJ4RT1B6ZP0XHD5C2VYMA"
+
 # Type: Object, Required: Yes
 #
 # Collection of devices that the server will manage.
@@ -57,22 +64,15 @@ devices:
         # The layout indicating how the panels will be
         # organized on screen. The available layouts are:
         #  - P1Full
-				#  - P2L1xR1
-				#  - P2T1xB1
-				#  - P3L1xR2
-				#  - P3L2xR1
-				#  - P4Grid
+        #  - P2L1xR1
+        #  - P2T1xB1
+        #  - P3L1xR2
+        #  - P3L2xR1
+        #  - P4Grid
         #
         # The PX prefix states the exact number of panels
         # that the layout supports.
-        layout: P1Full
-
-        # Type: Number, Required: No, Optional: 300
-        #
-        # The number of seconds that the screen can
-        # be used for before it expires and the device
-        # should render the next screen.
-        expiresIn: 300
+        layout: P2L1xR1
 
         # Type: Array, Required: Yes
         #
@@ -108,16 +108,3 @@ devices:
           # This is an example of a `tfl-issues` panel.
           - name: tube-status
             settings: {}
-
-# Type: Object, Required: Yes
-#
-# Admin profile settings.
-admin:
-
-  # Type: String, Required: Yes
-  #
-  # The API key that needs to be provided to the admin API
-  # endpoints.
-  #
-  # This needs to have a minimum length of 16 characters.
-  key: "Q7F3G2N8W9KJ4RT1B6ZP0XHD5C2VYMA"

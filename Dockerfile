@@ -23,10 +23,12 @@ USER node
 WORKDIR /app
 
 # Copy code & config.
-COPY package.json        .
-COPY pnpm-lock.yaml      .
-COPY pnpm-workspace.yaml .
-COPY src                 ./src
+COPY --chown=node:node package.json               .
+COPY --chown=node:node pnpm-lock.yaml             .
+COPY --chown=node:node pnpm-workspace.yaml        .
+COPY --chown=node:node packages/home-trmnl-api    ./packages/home-trmnl-api
+COPY --chown=node:node packages/home-trmnl-core   ./packages/home-trmnl-core
+COPY --chown=node:node packages/home-trmnl-panels ./packages/home-trmnl-panels
 
 # Enable server logging.
 ENV DEBUG="home-trmnl:*"
@@ -50,4 +52,4 @@ RUN pnpm install --frozen-lockfile --prod
 EXPOSE 1992
 
 # Start the application.
-CMD ["node", "/app/src/main.js", "/data/config.yaml"]
+CMD ["node", "/app/packages/home-trmnl-api/src/index.js", "/data/config.yaml"]

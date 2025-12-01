@@ -1,9 +1,9 @@
-# Dependencies
+# Node
 # -----------------
 
-node_modules
+node_modules/
 
-# Example
+# Local Dev
 # -----------------
 
 example
