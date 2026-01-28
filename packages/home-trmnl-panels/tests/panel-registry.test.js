@@ -9,7 +9,7 @@ import assert from 'node:assert';
 import {
 	getPanel,
 	getPanels
-} from '../src/panel-registry.js';
+} from '../src/index.js';
 import JoinWifi from '../src/panels/join-wifi.js';
 import TubeStatus from '../src/panels/tube-status.js';
 
