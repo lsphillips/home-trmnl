@@ -29,13 +29,17 @@
 
     "devDependencies" :
     {
-        "eslint" : "9.39.1",
-        "eslint-config-protect-me-from-my-stupidity" : "16.0.0"
+        "eslint" : "9.39.2",
+        "eslint-config-protect-me-from-my-stupidity" : "16.0.0",
+        "cheerio" : "1.1.2",
+        "msw" : "2.12.4",
+        "sharp" : "0.34.5"
     },
 
     "scripts" :
     {
         "lint" : "eslint \"**/*.js\"",
+        "test" : "pnpm recursive run test",
         "start" : "pnpm --filter home-trmnl-api run start"
     },
 

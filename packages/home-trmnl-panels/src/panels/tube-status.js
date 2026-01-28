@@ -3,6 +3,9 @@ import * as z from 'zod';
 import {
 	Panel
 } from 'home-trmnl-core';
+import {
+	problem
+} from './components/problem.js';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -54,9 +57,7 @@ export default class TubeStatus extends Panel
 		// Nothing to initialize.
 	}
 
-	async render ({
-		components : { problem }
-	})
+	async render ()
 	{
 		const lines = await getLinesWithDisruption();
 
@@ -70,6 +71,9 @@ export default class TubeStatus extends Panel
 				html, error : true
 			};
 		}
+
+		// Sort alphabetically.
+		lines.sort((a, b) => a.name.localeCompare(b.name));
 
 		const html = `<div class="layout layout--col tube-status-panel">
 			<style>

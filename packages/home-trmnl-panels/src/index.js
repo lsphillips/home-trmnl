@@ -13,9 +13,16 @@ export async function getPanels ()
 
 export async function getPanel (name)
 {
-	const {
-		default : Panel
-	} = await import(`./panels/${name}.js?v=${ Date.now() }`);
+	try
+	{
+		const {
+			default : Panel
+		} = await import(`./panels/${name}.js?v=${ Date.now() }`);
 
-	return Panel;
+		return Panel;
+	}
+	catch
+	{
+		return null;
+	}
 }

@@ -1,0 +1,675 @@
+[
+	{
+		"$type": "Tfl.Api.Presentation.Entities.Line, Tfl.Api.Presentation.Entities",
+		"id": "bakerloo",
+		"name": "Bakerloo",
+		"modeName": "tube",
+		"created": "1992-06-13T05:00:50.000Z",
+		"modified": "1992-06-13T05:00:50.000Z",
+		"lineStatuses": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+				"id": 0,
+				"lineId": "bakerloo",
+				"statusSeverity": 1,
+				"statusSeverityDescription": "Closed",
+				"reason": "Bakerloo line: Closed",
+				"created": "0001-01-01T00:00:00",
+				"validityPeriods": [
+					{
+						"$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+						"fromDate": "1992-06-13T05:00:50.000Z",
+						"toDate": "1992-06-13T05:30:50.000Z",
+						"isNow": true
+					}
+				],
+				"disruption": {
+					"$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+					"category": "RealTime",
+					"categoryDescription": "RealTime",
+					"description": "Bakerloo line: Closed",
+					"affectedRoutes": [],
+					"affectedStops": [],
+					"closureText": "closed"
+				}
+			}
+		],
+		"serviceTypes": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Regular",
+				"uri": "/Line/Route?ids=Bakerloo&serviceTypes=Regular"
+			}
+		]
+	},
+	{
+		"$type": "Tfl.Api.Presentation.Entities.Line, Tfl.Api.Presentation.Entities",
+		"id": "central",
+		"name": "Central",
+		"modeName": "tube",
+		"created": "1992-06-13T05:00:50.000Z",
+		"modified": "1992-06-13T05:00:50.000Z",
+		"lineStatuses": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+				"id": 0,
+				"lineId": "central",
+				"statusSeverity": 2,
+				"statusSeverityDescription": "Suspended",
+				"reason": "Central line: Suspended",
+				"created": "0001-01-01T00:00:00",
+				"validityPeriods": [
+					{
+						"$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+						"fromDate": "1992-06-13T05:00:50.000Z",
+						"toDate": "1992-06-13T05:30:50.000Z",
+						"isNow": true
+					}
+				],
+				"disruption": {
+					"$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+					"category": "RealTime",
+					"categoryDescription": "RealTime",
+					"description": "Central line: Suspended",
+					"affectedRoutes": [],
+					"affectedStops": [],
+					"closureText": "suspended"
+				}
+			}
+		],
+		"serviceTypes": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Regular",
+				"uri": "/Line/Route?ids=Central&serviceTypes=Regular"
+			},
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Night",
+				"uri": "/Line/Route?ids=Central&serviceTypes=Night"
+			}
+		]
+	},
+	{
+		"$type": "Tfl.Api.Presentation.Entities.Line, Tfl.Api.Presentation.Entities",
+		"id": "circle",
+		"name": "Circle",
+		"modeName": "tube",
+		"created": "1992-06-13T05:00:50.000Z",
+		"modified": "1992-06-13T05:00:50.000Z",
+		"lineStatuses": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+				"id": 0,
+				"lineId": "circle",
+				"statusSeverity": 3,
+				"statusSeverityDescription": "Part suspended",
+				"reason": "Circle line: Part suspended",
+				"created": "0001-01-01T00:00:00",
+				"validityPeriods": [
+					{
+						"$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+						"fromDate": "1992-06-13T05:00:50.000Z",
+						"toDate": "1992-06-13T05:30:50.000Z",
+						"isNow": true
+					}
+				],
+				"disruption": {
+					"$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+					"category": "RealTime",
+					"categoryDescription": "RealTime",
+					"description": "Circle line: Part suspended",
+					"affectedRoutes": [],
+					"affectedStops": [],
+					"closureText": "partSuspended"
+				}
+			}
+		],
+		"serviceTypes": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Regular",
+				"uri": "/Line/Route?ids=Circle&serviceTypes=Regular"
+			}
+		]
+	},
+	{
+		"$type": "Tfl.Api.Presentation.Entities.Line, Tfl.Api.Presentation.Entities",
+		"id": "district",
+		"name": "District",
+		"modeName": "tube",
+		"created": "1992-06-13T05:00:50.000Z",
+		"modified": "1992-06-13T05:00:50.000Z",
+		"lineStatuses": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+				"id": 0,
+				"lineId": "district",
+				"statusSeverity": 4,
+				"statusSeverityDescription": "Planned closure",
+				"reason": "District line: Planned closure",
+				"created": "0001-01-01T00:00:00",
+				"validityPeriods": [
+					{
+						"$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+						"fromDate": "1992-06-13T05:00:50.000Z",
+						"toDate": "1992-06-13T05:30:50.000Z",
+						"isNow": true
+					},
+					{
+						"$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+						"fromDate": "1992-06-15T00:00:00.000Z",
+						"toDate": "1992-06-15T23:59:59.000Z",
+						"isNow": false
+					}
+				],
+				"disruption": {
+					"$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+					"category": "RealTime",
+					"categoryDescription": "RealTime",
+					"description": "District line: Planned closure",
+					"affectedRoutes": [],
+					"affectedStops": [],
+					"closureText": "plannedClosure"
+				}
+			}
+		],
+		"serviceTypes": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Regular",
+				"uri": "/Line/Route?ids=District&serviceTypes=Regular"
+			}
+		]
+	},
+	{
+		"$type": "Tfl.Api.Presentation.Entities.Line, Tfl.Api.Presentation.Entities",
+		"id": "dlr",
+		"name": "DLR",
+		"modeName": "dlr",
+		"created": "1992-06-13T05:00:50.000Z",
+		"modified": "1992-06-13T05:00:50.000Z",
+		"lineStatuses": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+				"id": 0,
+				"lineId": "dlr",
+				"statusSeverity": 5,
+				"statusSeverityDescription": "Part closure",
+				"reason": "DLR: Part closure",
+				"created": "0001-01-01T00:00:00",
+				"validityPeriods": [
+					{
+						"$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+						"fromDate": "1992-06-13T05:00:50.000Z",
+						"toDate": "1992-06-13T05:30:50.000Z",
+						"isNow": true
+					}
+				],
+				"disruption": {
+					"$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+					"category": "RealTime",
+					"categoryDescription": "RealTime",
+					"description": "DLR: Part closure",
+					"affectedRoutes": [],
+					"affectedStops": [],
+					"closureText": "partClosure"
+				}
+			}
+		],
+		"serviceTypes": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Regular",
+				"uri": "/Line/Route?ids=DLR&serviceTypes=Regular"
+			}
+		]
+	},
+	{
+		"$type": "Tfl.Api.Presentation.Entities.Line, Tfl.Api.Presentation.Entities",
+		"id": "elizabeth",
+		"name": "Elizabeth line",
+		"modeName": "elizabeth-line",
+		"created": "1992-06-13T05:00:50.000Z",
+		"modified": "1992-06-13T05:00:50.000Z",
+		"lineStatuses": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+				"id": 0,
+				"lineId": "elizabeth-line",
+				"statusSeverity": 6,
+				"statusSeverityDescription": "Severe delays",
+				"reason": "Elizabeth line: Severe delays",
+				"created": "0001-01-01T00:00:00",
+				"validityPeriods": [
+					{
+						"$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+						"fromDate": "1992-06-13T05:00:50.000Z",
+						"toDate": "1992-06-13T05:30:50.000Z",
+						"isNow": true
+					}
+				],
+				"disruption": {
+					"$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+					"category": "RealTime",
+					"categoryDescription": "RealTime",
+					"description": "Elizabeth line: Severe delays",
+					"affectedRoutes": [],
+					"affectedStops": [],
+					"closureText": "severeDelays"
+				}
+			}
+		],
+		"serviceTypes": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Regular",
+				"uri": "/Line/Route?ids=Elizabeth line&serviceTypes=Regular"
+			}
+		]
+	},
+	{
+		"$type": "Tfl.Api.Presentation.Entities.Line, Tfl.Api.Presentation.Entities",
+		"id": "hammersmith-city",
+		"name": "Hammersmith & City",
+		"modeName": "tube",
+		"created": "1992-06-13T05:00:50.000Z",
+		"modified": "1992-06-13T05:00:50.000Z",
+		"lineStatuses": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+				"id": 0,
+				"lineId": "hammersmith-city",
+				"statusSeverity": 7,
+				"statusSeverityDescription": "Reduced service",
+				"reason": "Hammersmith & City line: Reduced service",
+				"created": "0001-01-01T00:00:00",
+				"validityPeriods": [
+					{
+						"$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+						"fromDate": "1992-06-13T05:00:50.000Z",
+						"toDate": "1992-06-13T05:30:50.000Z",
+						"isNow": true
+					}
+				],
+				"disruption": {
+					"$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+					"category": "RealTime",
+					"categoryDescription": "RealTime",
+					"description": "Hammersmith & City line: Reduced service",
+					"affectedRoutes": [],
+					"affectedStops": [],
+					"closureText": "reducedService"
+				}
+			}
+		],
+		"serviceTypes": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Regular",
+				"uri": "/Line/Route?ids=Hammersmith & City&serviceTypes=Regular"
+			}
+		]
+	},
+	{
+		"$type": "Tfl.Api.Presentation.Entities.Line, Tfl.Api.Presentation.Entities",
+		"id": "jubilee",
+		"name": "Jubilee",
+		"modeName": "tube",
+		"created": "1992-06-13T05:00:50.000Z",
+		"modified": "1992-06-13T05:00:50.000Z",
+		"lineStatuses": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+				"id": 0,
+				"statusSeverity": 10,
+				"statusSeverityDescription": "Good Service",
+				"created": "0001-01-01T00:00:00",
+				"validityPeriods": []
+			}
+		],
+		"serviceTypes": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Regular",
+				"uri": "/Line/Route?ids=Jubilee&serviceTypes=Regular"
+			},
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Night",
+				"uri": "/Line/Route?ids=Jubilee&serviceTypes=Night"
+			}
+		]
+	},
+	{
+		"$type": "Tfl.Api.Presentation.Entities.Line, Tfl.Api.Presentation.Entities",
+		"id": "liberty",
+		"name": "Liberty",
+		"modeName": "overground",
+		"created": "1992-06-13T05:00:50.000Z",
+		"modified": "1992-06-13T05:00:50.000Z",
+		"lineStatuses": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+				"id": 0,
+				"lineId": "liberty",
+				"statusSeverity": 9,
+				"statusSeverityDescription": "Minor delays",
+				"reason": "Liberty line: Minor delays",
+				"created": "0001-01-01T00:00:00",
+				"validityPeriods": [
+					{
+						"$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+						"fromDate": "1992-06-13T05:00:50.000Z",
+						"toDate": "1992-06-13T05:30:50.000Z",
+						"isNow": true
+					}
+				],
+				"disruption": {
+					"$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+					"category": "RealTime",
+					"categoryDescription": "RealTime",
+					"description": "Liberty line: Minor delays",
+					"affectedRoutes": [],
+					"affectedStops": [],
+					"closureText": "minorDelays"
+				}
+			}
+		],
+		"serviceTypes": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Regular",
+				"uri": "/Line/Route?ids=Liberty&serviceTypes=Regular"
+			}
+		]
+	},
+	{
+		"$type": "Tfl.Api.Presentation.Entities.Line, Tfl.Api.Presentation.Entities",
+		"id": "lioness",
+		"name": "Lioness",
+		"modeName": "overground",
+		"created": "1992-06-13T05:00:50.000Z",
+		"modified": "1992-06-13T05:00:50.000Z",
+		"lineStatuses": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+				"id": 0,
+				"statusSeverity": 10,
+				"statusSeverityDescription": "Good Service",
+				"created": "0001-01-01T00:00:00",
+				"validityPeriods": []
+			}
+		],
+		"serviceTypes": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Regular",
+				"uri": "/Line/Route?ids=Lioness&serviceTypes=Regular"
+			}
+		]
+	},
+	{
+		"$type": "Tfl.Api.Presentation.Entities.Line, Tfl.Api.Presentation.Entities",
+		"id": "metropolitan",
+		"name": "Metropolitan",
+		"modeName": "tube",
+		"created": "1992-06-13T05:00:50.000Z",
+		"modified": "1992-06-13T05:00:50.000Z",
+		"lineStatuses": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+				"id": 0,
+				"statusSeverity": 10,
+				"statusSeverityDescription": "Good Service",
+				"created": "0001-01-01T00:00:00",
+				"validityPeriods": []
+			}
+		],
+		"serviceTypes": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Regular",
+				"uri": "/Line/Route?ids=Metropolitan&serviceTypes=Regular"
+			}
+		]
+	},
+	{
+		"$type": "Tfl.Api.Presentation.Entities.Line, Tfl.Api.Presentation.Entities",
+		"id": "mildmay",
+		"name": "Mildmay",
+		"modeName": "overground",
+		"created": "1992-06-13T05:00:50.000Z",
+		"modified": "1992-06-13T05:00:50.000Z",
+		"lineStatuses": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+				"id": 0,
+				"statusSeverity": 10,
+				"statusSeverityDescription": "Good Service",
+				"created": "0001-01-01T00:00:00",
+				"validityPeriods": []
+			}
+		],
+		"serviceTypes": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Regular",
+				"uri": "/Line/Route?ids=Mildmay&serviceTypes=Regular"
+			}
+		]
+	},
+	{
+		"$type": "Tfl.Api.Presentation.Entities.Line, Tfl.Api.Presentation.Entities",
+		"id": "northern",
+		"name": "Northern",
+		"modeName": "tube",
+		"created": "1992-06-13T05:00:50.000Z",
+		"modified": "1992-06-13T05:00:50.000Z",
+		"lineStatuses": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+				"id": 0,
+				"statusSeverity": 10,
+				"statusSeverityDescription": "Good Service",
+				"created": "0001-01-01T00:00:00",
+				"validityPeriods": []
+			}
+		],
+		"serviceTypes": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Regular",
+				"uri": "/Line/Route?ids=Northern&serviceTypes=Regular"
+			},
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Night",
+				"uri": "/Line/Route?ids=Northern&serviceTypes=Night"
+			}
+		]
+	},
+	{
+		"$type": "Tfl.Api.Presentation.Entities.Line, Tfl.Api.Presentation.Entities",
+		"id": "piccadilly",
+		"name": "Piccadilly",
+		"modeName": "tube",
+		"created": "1992-06-13T05:00:50.000Z",
+		"modified": "1992-06-13T05:00:50.000Z",
+		"lineStatuses": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+				"id": 0,
+				"statusSeverity": 10,
+				"statusSeverityDescription": "Good Service",
+				"created": "0001-01-01T00:00:00",
+				"validityPeriods": []
+			}
+		],
+		"serviceTypes": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Regular",
+				"uri": "/Line/Route?ids=Piccadilly&serviceTypes=Regular"
+			},
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Night",
+				"uri": "/Line/Route?ids=Piccadilly&serviceTypes=Night"
+			}
+		]
+	},
+	{
+		"$type": "Tfl.Api.Presentation.Entities.Line, Tfl.Api.Presentation.Entities",
+		"id": "suffragette",
+		"name": "Suffragette",
+		"modeName": "overground",
+		"created": "1992-06-13T05:00:50.000Z",
+		"modified": "1992-06-13T05:00:50.000Z",
+		"lineStatuses": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+				"id": 0,
+				"statusSeverity": 10,
+				"statusSeverityDescription": "Good Service",
+				"created": "0001-01-01T00:00:00",
+				"validityPeriods": []
+			}
+		],
+		"serviceTypes": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Regular",
+				"uri": "/Line/Route?ids=Suffragette&serviceTypes=Regular"
+			}
+		]
+	},
+	{
+		"$type": "Tfl.Api.Presentation.Entities.Line, Tfl.Api.Presentation.Entities",
+		"id": "victoria",
+		"name": "Victoria",
+		"modeName": "tube",
+		"created": "1992-06-13T05:00:50.000Z",
+		"modified": "1992-06-13T05:00:50.000Z",
+		"lineStatuses": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+				"id": 0,
+				"statusSeverity": 10,
+				"statusSeverityDescription": "Good Service",
+				"created": "0001-01-01T00:00:00",
+				"validityPeriods": []
+			}
+		],
+		"serviceTypes": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Regular",
+				"uri": "/Line/Route?ids=Victoria&serviceTypes=Regular"
+			},
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Night",
+				"uri": "/Line/Route?ids=Victoria&serviceTypes=Night"
+			}
+		]
+	},
+	{
+		"$type": "Tfl.Api.Presentation.Entities.Line, Tfl.Api.Presentation.Entities",
+		"id": "waterloo-city",
+		"name": "Waterloo & City",
+		"modeName": "tube",
+		"created": "1992-06-13T05:00:50.000Z",
+		"modified": "1992-06-13T05:00:50.000Z",
+		"lineStatuses": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+				"id": 0,
+				"lineId": "waterloo-city",
+				"statusSeverity": 4,
+				"statusSeverityDescription": "Planned closure",
+				"reason": "Waterloo & City: Planned closure",
+				"created": "0001-01-01T00:00:00",
+				"validityPeriods": [
+					{
+						"$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+						"fromDate": "1992-06-15T00:00:00.000Z",
+						"toDate": "1992-06-15T23:59:59.000Z",
+						"isNow": false
+					}
+				],
+				"disruption": {
+					"$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+					"category": "RealTime",
+					"categoryDescription": "RealTime",
+					"description": "Waterloo & City: Planned closure",
+					"affectedRoutes": [],
+					"affectedStops": [],
+					"closureText": "plannedClosure"
+				}
+			}
+		],
+		"serviceTypes": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Regular",
+				"uri": "/Line/Route?ids=Waterloo & City&serviceTypes=Regular"
+			}
+		]
+	},
+	{
+		"$type": "Tfl.Api.Presentation.Entities.Line, Tfl.Api.Presentation.Entities",
+		"id": "weaver",
+		"name": "Weaver",
+		"modeName": "overground",
+		"created": "1992-06-13T05:00:50.000Z",
+		"modified": "1992-06-13T05:00:50.000Z",
+		"lineStatuses": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+				"id": 0,
+				"statusSeverity": 10,
+				"statusSeverityDescription": "Good Service",
+				"created": "0001-01-01T00:00:00",
+				"validityPeriods": []
+			}
+		],
+		"serviceTypes": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Regular",
+				"uri": "/Line/Route?ids=Weaver&serviceTypes=Regular"
+			}
+		]
+	},
+	{
+		"$type": "Tfl.Api.Presentation.Entities.Line, Tfl.Api.Presentation.Entities",
+		"id": "windrush",
+		"name": "Windrush",
+		"modeName": "overground",
+		"created": "1992-06-13T05:00:50.000Z",
+		"modified": "1992-06-13T05:00:50.000Z",
+		"lineStatuses": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+				"id": 0,
+				"statusSeverity": 10,
+				"statusSeverityDescription": "Good Service",
+				"created": "0001-01-01T00:00:00",
+				"validityPeriods": []
+			}
+		],
+		"serviceTypes": [
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Regular",
+				"uri": "/Line/Route?ids=Windrush&serviceTypes=Regular"
+			},
+			{
+				"$type": "Tfl.Api.Presentation.Entities.LineServiceTypeInfo, Tfl.Api.Presentation.Entities",
+				"name": "Night",
+				"uri": "/Line/Route?ids=Windrush&serviceTypes=Night"
+			}
+		]
+	}
+]

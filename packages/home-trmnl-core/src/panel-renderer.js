@@ -2,9 +2,6 @@ import {
 	createHash
 } from 'node:crypto';
 import debug from 'debug';
-import {
-	problem
-} from './components/problem.js';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -14,9 +11,24 @@ const log = debug('home-trmnl:core:panel-renderer');
 
 function renderErrorPanel ()
 {
-	const html = problem({
-		message : 'An unexpected error occurred!'
-	});
+	const html = `<div class="layout layout--col uncaught-error">
+		<style>
+			.uncaught-error__icon {
+				width: 20%;
+				height: auto;
+
+			}
+			.uncaught-error__message {
+				margin-top: 10px;
+			}
+		</style>
+		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="uncaught-error__icon">
+			<path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 2H8L2 8v8l6 6h8l6-6V8zM12 8v4M12 16.02V16" />
+		</svg>
+		<p class="label text--black uncaught-error__message">
+			An unexpected error occurred!
+		</p>
+	</div>`;
 
 	return {
 		html, error : true
@@ -82,11 +94,7 @@ export class PanelRenderer
 
 		try
 		{
-			return await panel.render({
-				components : {
-					problem
-				}
-			});
+			return await panel.render();
 		}
 		catch (error)
 		{

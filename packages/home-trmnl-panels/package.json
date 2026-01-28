@@ -13,13 +13,18 @@
 
     "dependencies" :
     {
-        "qr" : "0.5.2",
+        "qr" : "0.5.3",
         "home-trmnl-core" : "workspace:*"
     },
 
     "peerDependencies" :
     {
         "zod" : "4.1.13"
+    },
+
+    "scripts" :
+    {
+        "test" : "node --test"
     },
 
     "engines" :
