@@ -13,7 +13,7 @@ function renderWifiQrCode ({
 	hidden = false
 })
 {
-	const escape = value => value.replace(/(["';,\\])/g, '\\$1');
+	const escape = value => value.replace(/[:;\\]/g, '\\$&');
 
 	return qr(`WIFI:S:${ escape(ssid) };T:${encryption};P:${ escape(password) };H:${hidden}`, 'svg', {
 		ecc      : 'low',

@@ -15,7 +15,7 @@ import {
 } from 'msw/node';
 import {
 	renderPanel
-} from './support/panel-renderer.js';
+} from './support/panel-utilities.js';
 import TubeStatusPanelObject from './panel-objects/tube-status-panel-object.js';
 import tubeStatsResponseWithAllLinesHealthy from './fixtures/tube-status-api/response-with-all-lines-healthy.json' with { type : 'json' };
 import tubeStatsResponseWithMixedLineHealth from './fixtures/tube-status-api/response-with-mixed-line-health.json' with { type : 'json' };

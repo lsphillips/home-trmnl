@@ -12,3 +12,8 @@ export async function renderPanel (Panel, Settings, PanelObject)
 	// Parse.
 	return new PanelObject(html);
 }
+
+export function checkPanelConfig (Panel, Configuration)
+{
+	return Panel.Schema.parse(Configuration);
+}
