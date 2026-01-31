@@ -2,7 +2,7 @@ import sharp from 'sharp';
 import {
 	Bitmap
 } from 'qr';
-import decodeQR from 'qr/decode.js';
+import * as qrDecoder from 'qr/decode.js';
 import HomeTrmnlPanelObject from './home-trmnl-panel-object.js';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -29,7 +29,7 @@ async function decodeSvgQrCode (svg)
 		data.map(byte => (byte < 128 ? 0 : 1))
 	);
 
-	return decodeQR(bitmap);
+	return qrDecoder.decodeQR(bitmap);
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
