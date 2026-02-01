@@ -63,6 +63,17 @@ pnpm run lint
 
 Please refer to the [eslint.config.js](eslint.config.js) file to familiar yourself with the rules.
 
+### Tests
+
+To run project tests, run this command:
+
+``` bash
+pnpm test
+```
+
+> [!NOTE]
+> Test coverage is still not there yet; there is only robust functionality coverage for the panels.
+
 ### Building
 
 To build a Docker image, run this command:
