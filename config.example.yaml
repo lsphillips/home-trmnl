@@ -107,4 +107,35 @@ devices:
 
           # This is an example of a `tfl-issues` panel.
           - name: tube-status
-            settings: {}
+            settings:
+
+              # Type: Array, Required: No
+              #
+              # A collection of no more than 8 TFL lines to
+              # prioritize the status of when they are facing
+              # disruption.
+              #
+              # The following lines are accepted:
+              #   - bakerloo
+              #   - central
+              #   - circle
+              #   - district
+              #   - hammersmith-city
+              #   - jubilee
+              #   - metropolitan
+              #   - northern
+              #   - piccadilly
+              #   - victoria
+              #   - waterloo-city
+              #   - liberty
+              #   - lioness
+              #   - mildmay
+              #   - suffragette
+              #   - weaver
+              #   - windrush
+              #   - elizabeth
+              #   - dlr
+              prioritizing:
+                - piccadilly
+                - dlr
+                - elizabeth

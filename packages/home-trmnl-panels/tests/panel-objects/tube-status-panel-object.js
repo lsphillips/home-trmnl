@@ -19,8 +19,8 @@ export default class TubeStatusPanelObject extends HomeTrmnlPanelObject
 			.toArray();
 	}
 
-	getGoodServiceOnOtherLinesMessage ()
+	getRemainingOtherLinesMessage ()
 	{
-		return this.$('.tube-status-panel__all-other-lines').text().trim();
+		return this.$('.tube-status-panel__remaining-other-lines').text().trim();
 	}
 }

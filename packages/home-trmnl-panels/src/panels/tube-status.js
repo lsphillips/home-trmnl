@@ -49,17 +49,39 @@ async function getLinesWithDisruption ()
 export default class TubeStatus extends Panel
 {
 	static Schema = z.object({
-		// Nothing to configure.
+		prioritizing : z.array(z.literal([
+			'bakerloo',
+			'central',
+			'circle',
+			'district',
+			'hammersmith-city',
+			'jubilee',
+			'metropolitan',
+			'northern',
+			'piccadilly',
+			'victoria',
+			'waterloo-city',
+			'liberty',
+			'lioness',
+			'mildmay',
+			'suffragette',
+			'weaver',
+			'windrush',
+			'elizabeth',
+			'dlr'
+		])).max(8).default([])
 	});
 
-	async init ()
+	#prioritizing = null;
+
+	async init (settings)
 	{
-		// Nothing to initialize.
+		this.#prioritizing = new Set(settings.prioritizing);
 	}
 
 	async render ()
 	{
-		const lines = await getLinesWithDisruption();
+		let lines = await getLinesWithDisruption();
 
 		if (lines === null)
 		{
@@ -71,9 +93,6 @@ export default class TubeStatus extends Panel
 				html, error : true
 			};
 		}
-
-		// Sort alphabetically.
-		lines.sort((a, b) => a.name.localeCompare(b.name));
 
 		const html = `<div class="layout layout--col tube-status-panel">
 			<style>
@@ -123,21 +142,47 @@ export default class TubeStatus extends Panel
 
 		if (lines.length)
 		{
+			const issues = lines
+				.toSorted((a, b) =>
+				{
+					if (
+						this.#prioritizing.has(a.id) === this.#prioritizing.has(b.id)
+					)
+					{
+						return a.name.localeCompare(b.name);
+					}
+
+					return this.#prioritizing.has(a.id) ? -1 : 1;
+				})
+				.slice(0, 8);
+
 			content = `
 				<dl class="tube-status-panel__disrupted-lines">
-					${ lines.reduce((acc, line) => acc + `<div class="tube-status-panel__disrupted-line">
-						<dt class="value value--xxsmall tube-status-panel__disrupted-line-name tube-status-pabel__disrupted-line-name--${ line.id }">
-							${ line.name }
+					${ issues.reduce((acc, issue) => acc + `<div class="tube-status-panel__disrupted-line">
+						<dt class="value value--xxsmall tube-status-panel__disrupted-line-name tube-status-pabel__disrupted-line-name--${ issue.id }">
+							${ issue.name }
 						</dt>
 						<dd class="value value--xxsmall tube-status-panel__disrupted-line-status">
-							${ line.status }
+							${ issue.status }
 						</dd>
 					</div>`, '') }
 				</dl>
-				<span class="label text--black tube-status-panel__all-other-lines">
-					Good service on all other lines!
-				</span>
 			`;
+
+			if (lines.length === issues.length)
+			{
+				content += `<span class="label text--black tube-status-panel__remaining-other-lines">
+					Good service on all other lines!
+				</span>`;
+			}
+			else
+			{
+				const other = lines.length - issues.length;
+
+				content += `<span class="label text--black tube-status-panel__remaining-other-lines">
+					${ other > 1 ? `Issues also on ${other} other lines!` : 'Issues also on 1 other line!' }
+				</span>`;
+			}
 		}
 		else
 		{

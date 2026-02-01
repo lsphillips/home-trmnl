@@ -10,28 +10,10 @@
 			{
 				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
 				"id": 0,
-				"lineId": "bakerloo",
-				"statusSeverity": 1,
-				"statusSeverityDescription": "Closed",
-				"reason": "Bakerloo line: Closed",
+				"statusSeverity": 10,
+				"statusSeverityDescription": "Good Service",
 				"created": "0001-01-01T00:00:00",
-				"validityPeriods": [
-					{
-						"$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
-						"fromDate": "1992-06-13T05:00:50.000Z",
-						"toDate": "1992-06-13T05:30:50.000Z",
-						"isNow": true
-					}
-				],
-				"disruption": {
-					"$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
-					"category": "RealTime",
-					"categoryDescription": "RealTime",
-					"description": "Bakerloo line: Closed",
-					"affectedRoutes": [],
-					"affectedStops": [],
-					"closureText": "closed"
-				}
+				"validityPeriods": []
 			}
 		],
 		"serviceTypes": [
@@ -53,28 +35,10 @@
 			{
 				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
 				"id": 0,
-				"lineId": "central",
-				"statusSeverity": 2,
-				"statusSeverityDescription": "Suspended",
-				"reason": "Central line: Suspended",
+				"statusSeverity": 10,
+				"statusSeverityDescription": "Good Service",
 				"created": "0001-01-01T00:00:00",
-				"validityPeriods": [
-					{
-						"$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
-						"fromDate": "1992-06-13T05:00:50.000Z",
-						"toDate": "1992-06-13T05:30:50.000Z",
-						"isNow": true
-					}
-				],
-				"disruption": {
-					"$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
-					"category": "RealTime",
-					"categoryDescription": "RealTime",
-					"description": "Central line: Suspended",
-					"affectedRoutes": [],
-					"affectedStops": [],
-					"closureText": "suspended"
-				}
+				"validityPeriods": []
 			}
 		],
 		"serviceTypes": [
@@ -101,28 +65,10 @@
 			{
 				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
 				"id": 0,
-				"lineId": "circle",
-				"statusSeverity": 3,
-				"statusSeverityDescription": "Part suspended",
-				"reason": "Circle line: Part suspended",
+				"statusSeverity": 10,
+				"statusSeverityDescription": "Good Service",
 				"created": "0001-01-01T00:00:00",
-				"validityPeriods": [
-					{
-						"$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
-						"fromDate": "1992-06-13T05:00:50.000Z",
-						"toDate": "1992-06-13T05:30:50.000Z",
-						"isNow": true
-					}
-				],
-				"disruption": {
-					"$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
-					"category": "RealTime",
-					"categoryDescription": "RealTime",
-					"description": "Circle line: Part suspended",
-					"affectedRoutes": [],
-					"affectedStops": [],
-					"closureText": "partSuspended"
-				}
+				"validityPeriods": []
 			}
 		],
 		"serviceTypes": [
@@ -144,34 +90,10 @@
 			{
 				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
 				"id": 0,
-				"lineId": "district",
-				"statusSeverity": 4,
-				"statusSeverityDescription": "Planned closure",
-				"reason": "District line: Planned closure",
+				"statusSeverity": 10,
+				"statusSeverityDescription": "Good Service",
 				"created": "0001-01-01T00:00:00",
-				"validityPeriods": [
-					{
-						"$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
-						"fromDate": "1992-06-13T05:00:50.000Z",
-						"toDate": "1992-06-13T05:30:50.000Z",
-						"isNow": true
-					},
-					{
-						"$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
-						"fromDate": "1992-06-15T00:00:00.000Z",
-						"toDate": "1992-06-15T23:59:59.000Z",
-						"isNow": false
-					}
-				],
-				"disruption": {
-					"$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
-					"category": "RealTime",
-					"categoryDescription": "RealTime",
-					"description": "District line: Planned closure",
-					"affectedRoutes": [],
-					"affectedStops": [],
-					"closureText": "plannedClosure"
-				}
+				"validityPeriods": []
 			}
 		],
 		"serviceTypes": [
@@ -193,28 +115,10 @@
 			{
 				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
 				"id": 0,
-				"lineId": "dlr",
-				"statusSeverity": 5,
-				"statusSeverityDescription": "Part closure",
-				"reason": "DLR: Part closure",
+				"statusSeverity": 10,
+				"statusSeverityDescription": "Good Service",
 				"created": "0001-01-01T00:00:00",
-				"validityPeriods": [
-					{
-						"$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
-						"fromDate": "1992-06-13T05:00:50.000Z",
-						"toDate": "1992-06-13T05:30:50.000Z",
-						"isNow": true
-					}
-				],
-				"disruption": {
-					"$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
-					"category": "RealTime",
-					"categoryDescription": "RealTime",
-					"description": "DLR: Part closure",
-					"affectedRoutes": [],
-					"affectedStops": [],
-					"closureText": "partClosure"
-				}
+				"validityPeriods": []
 			}
 		],
 		"serviceTypes": [
@@ -236,28 +140,10 @@
 			{
 				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
 				"id": 0,
-				"lineId": "elizabeth-line",
-				"statusSeverity": 6,
-				"statusSeverityDescription": "Severe delays",
-				"reason": "Elizabeth line: Severe delays",
+				"statusSeverity": 10,
+				"statusSeverityDescription": "Good Service",
 				"created": "0001-01-01T00:00:00",
-				"validityPeriods": [
-					{
-						"$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
-						"fromDate": "1992-06-13T05:00:50.000Z",
-						"toDate": "1992-06-13T05:30:50.000Z",
-						"isNow": true
-					}
-				],
-				"disruption": {
-					"$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
-					"category": "RealTime",
-					"categoryDescription": "RealTime",
-					"description": "Elizabeth line: Severe delays",
-					"affectedRoutes": [],
-					"affectedStops": [],
-					"closureText": "severeDelays"
-				}
+				"validityPeriods": []
 			}
 		],
 		"serviceTypes": [
@@ -279,28 +165,10 @@
 			{
 				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
 				"id": 0,
-				"lineId": "hammersmith-city",
-				"statusSeverity": 7,
-				"statusSeverityDescription": "Reduced service",
-				"reason": "Hammersmith & City line: Reduced service",
+				"statusSeverity": 10,
+				"statusSeverityDescription": "Good Service",
 				"created": "0001-01-01T00:00:00",
-				"validityPeriods": [
-					{
-						"$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
-						"fromDate": "1992-06-13T05:00:50.000Z",
-						"toDate": "1992-06-13T05:30:50.000Z",
-						"isNow": true
-					}
-				],
-				"disruption": {
-					"$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
-					"category": "RealTime",
-					"categoryDescription": "RealTime",
-					"description": "Hammersmith & City line: Reduced service",
-					"affectedRoutes": [],
-					"affectedStops": [],
-					"closureText": "reducedService"
-				}
+				"validityPeriods": []
 			}
 		],
 		"serviceTypes": [
@@ -352,28 +220,10 @@
 			{
 				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
 				"id": 0,
-				"lineId": "liberty",
-				"statusSeverity": 9,
-				"statusSeverityDescription": "Minor delays",
-				"reason": "Liberty line: Minor delays",
+				"statusSeverity": 10,
+				"statusSeverityDescription": "Good Service",
 				"created": "0001-01-01T00:00:00",
-				"validityPeriods": [
-					{
-						"$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
-						"fromDate": "1992-06-13T05:00:50.000Z",
-						"toDate": "1992-06-13T05:30:50.000Z",
-						"isNow": true
-					}
-				],
-				"disruption": {
-					"$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
-					"category": "RealTime",
-					"categoryDescription": "RealTime",
-					"description": "Liberty line: Minor delays",
-					"affectedRoutes": [],
-					"affectedStops": [],
-					"closureText": "minorDelays"
-				}
+				"validityPeriods": []
 			}
 		],
 		"serviceTypes": [
@@ -585,28 +435,10 @@
 			{
 				"$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
 				"id": 0,
-				"lineId": "waterloo-city",
-				"statusSeverity": 4,
-				"statusSeverityDescription": "Planned closure",
-				"reason": "Waterloo & City: Planned closure",
+				"statusSeverity": 10,
+				"statusSeverityDescription": "Good Service",
 				"created": "0001-01-01T00:00:00",
-				"validityPeriods": [
-					{
-						"$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
-						"fromDate": "1992-06-15T00:00:00.000Z",
-						"toDate": "1992-06-15T23:59:59.000Z",
-						"isNow": false
-					}
-				],
-				"disruption": {
-					"$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
-					"category": "RealTime",
-					"categoryDescription": "RealTime",
-					"description": "Waterloo & City: Planned closure",
-					"affectedRoutes": [],
-					"affectedStops": [],
-					"closureText": "plannedClosure"
-				}
+				"validityPeriods": []
 			}
 		],
 		"serviceTypes": [
