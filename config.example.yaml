@@ -53,6 +53,19 @@ devices:
     # This needs to have a minimum length of 16 characters.
     key: 9KJ7T2QZP1H4V8MW3RCD0XY6BNA5FGU
 
+    # Type: Boolean, Required: No, Default: true
+    #
+    # Indicates whether the device should be sent firmware
+    # updates by the server when available.
+    autoUpdate: true
+
+    # Type: String, Required: No, Default: 1
+    #
+    # Indicates the bit depth that the device supports,
+    # this also implies the number of colors that the
+    # screen images will contain.
+    bitDepth: 2
+
     # Type: Array, Required: Yes
     #
     # The collection of screens for the device that
@@ -99,6 +112,12 @@ devices:
               # The encryption type used by the WiFi
               # network, this can be `WPA` or `WEP`.
               encryption: WPA
+
+              # Type: Boolean, Required: No, Default: false
+              #
+              # Indicates if the WiFi network is hidden or
+              # not.
+              hidden: false
 
               # Type: String, Required: No
               #

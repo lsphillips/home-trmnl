@@ -61,6 +61,7 @@ export class ConfigReader
 				key        : z.string().min(16),
 				address    : z.string(),
 				autoUpdate : z.boolean().default(true),
+				bitDepth   : z.number().positive().min(1).refine(n => (n & (n - 1)) === 0).default(1),
 				screens    : z.array(z.object({
 					layout : z.literal([
 						'P1Full',

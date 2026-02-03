@@ -13,12 +13,13 @@ function createMemoryTable (definitions)
 {
 	const devices = {};
 
-	for (const { id, address, key, screens, autoUpdate } of definitions)
+	for (const { id, address, key, screens, autoUpdate, bitDepth } of definitions)
 	{
 		devices[address] = {
 			id,
 			address,
 			key,
+			bitDepth,
 			autoUpdate,
 			screen : 0,
 			model : null,
@@ -61,6 +62,7 @@ export class DeviceRepository
 			model,
 			firmware,
 			battery,
+			bitDepth,
 			autoUpdate,
 			error
 		} = device;
@@ -71,6 +73,7 @@ export class DeviceRepository
 			model,
 			firmware,
 			battery,
+			bitDepth,
 			autoUpdate,
 			error
 		};

@@ -11,9 +11,9 @@ const log = debug('home-trmnl:core:screen-renderer');
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 export async function createTrmnlPng (buffer, path, {
-	width  = 800,
-	height = 480,
-	colors = 2
+	width    = 800,
+	height   = 480,
+	bitDepth = 1
 })
 {
 	function clamp (value)
@@ -37,6 +37,7 @@ export async function createTrmnlPng (buffer, path, {
 		});
 
 	const dithered = new Float32Array(data);
+	const colors   = 1 << bitDepth;
 	const delta    = 255 / (colors - 1);
 
 	// Apply Floyd Steinberg Dither.
@@ -115,7 +116,8 @@ export class ScreenRenderer
 
 	async renderScreen (screen, {
 		width,
-		height
+		height,
+		bitDepth
 	})
 	{
 		const layout = this.#layoutFactory
@@ -128,14 +130,15 @@ export class ScreenRenderer
 		const error = panels
 			.some(panel => panel.error);
 
-		log('Rendering %s x %s screen using layout `%s`.', width, height, screen.layout);
+		log('Rendering %s x %s screen, with bit depth of %s, using layout `%s`.', width, height, bitDepth, screen.layout);
 
 		const html = layout(
 			panels.map(p => p.html)
 		);
 
 		const view = await this.#htmlRenderer.render(html, {
-			width, height
+			width,
+			height
 		});
 
 		log('Converting screen to TRMNL compliant PNG image.');
@@ -143,7 +146,9 @@ export class ScreenRenderer
 		const file = `${screen.id}.png`;
 
 		await createTrmnlPng(view, join(this.#screenImagePath, file), {
-			width, height, colors : 4
+			width,
+			height,
+			bitDepth
 		});
 
 		log('Finished Created screen image file `%s` that should be visible for %s second(s).', file, screen.expiresIn);

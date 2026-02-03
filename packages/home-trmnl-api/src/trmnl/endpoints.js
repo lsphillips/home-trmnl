@@ -107,7 +107,8 @@ export function registerTrmnlEndpoints (server, {
 		const render = await screens
 			.renderScreen(screen, {
 				width,
-				height
+				height,
+				bitDepth : device.bitDepth
 			});
 
 		await devices.updateDeviceStatus(address, {
