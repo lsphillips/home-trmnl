@@ -123,7 +123,7 @@ export function registerTrmnlEndpoints (server, {
 			logs
 		} = readLogRequest(request);
 
-		const authorized = await devices.isAuthorizedDevice(address, key);
+		const authorized = await devices.isDeviceAuthorized(address, key);
 
 		if (!authorized)
 		{
