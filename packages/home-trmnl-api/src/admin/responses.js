@@ -13,6 +13,7 @@ export function respondWithNotAuthorized (response)
 }
 
 export function respondWithDeviceStatus (response, {
+	address,
 	model,
 	firmware,
 	battery,
@@ -20,6 +21,7 @@ export function respondWithDeviceStatus (response, {
 })
 {
 	response.status(200).send({
+		address,
 		model,
 		firmware,
 		battery,
