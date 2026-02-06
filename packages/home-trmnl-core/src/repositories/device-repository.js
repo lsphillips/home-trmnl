@@ -9,7 +9,30 @@ const log = debug('home-trmnl:core:device-repository');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-function createMemoryTable (definitions)
+function createScreenTable (definitions)
+{
+	const screens = [];
+
+	for (const { type, duration, layout, panels, image } of definitions)
+	{
+		const composed = type === 'composed', id = randomUUID();
+
+		screens.push({
+			id,
+			composed,
+			panels,
+			duration,
+			layout,
+			image
+		});
+
+		log('Loaded %s screen into data table.', type);
+	}
+
+	return screens;
+}
+
+function createDeviceTable (definitions)
 {
 	const devices = {};
 
@@ -21,14 +44,12 @@ function createMemoryTable (definitions)
 			key,
 			bitDepth,
 			autoUpdate,
-			screen : 0,
-			model : null,
+			screen   : -1,
+			model    : null,
 			firmware : null,
-			battery : 0,
-			error : false,
-			screens : screens.map(screen => ({
-				id : randomUUID(), ...screen
-			}))
+			battery  : 0,
+			error    : false,
+			screens  : createScreenTable(screens)
 		};
 
 		log('Loaded device `%s`, with address `%s`, into data table.', id, address);
@@ -45,7 +66,7 @@ export class DeviceRepository
 
 	constructor (devices)
 	{
-		this.#devices = createMemoryTable(devices);
+		this.#devices = createDeviceTable(devices);
 	}
 
 	async getDevice (address)
@@ -102,8 +123,11 @@ export class DeviceRepository
 
 		if (next >= device.screens.length)
 		{
-			next = device.screen = 0;
+			next = 0;
 		}
+
+		// Record.
+		device.screen = next;
 
 		return device.screens[next];
 	}

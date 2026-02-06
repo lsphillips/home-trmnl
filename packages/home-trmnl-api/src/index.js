@@ -2,9 +2,10 @@ import {
 	resolve
 } from 'node:path';
 import fastify from 'fastify';
+import fastifyStatic from '@fastify/static';
 import debug from 'debug';
 import {
-	createCore
+	createTrmnlManager
 } from 'home-trmnl-core';
 import {
 	getPanels
@@ -27,13 +28,18 @@ const log = debug('home-trmnl:api');
 
 export async function main ()
 {
+	log('Loading panels.');
+
 	const panels = await getPanels();
+
+	log('Loading configuration.');
 
 	const {
 		devices,
 		settings : {
 			trmnlApiUri,
 			screenImagePath,
+			referenceImagePath,
 			host,
 			useSandboxRendering,
 			adminApiKeys
@@ -43,11 +49,16 @@ export async function main ()
 			resolve(process.argv[2])
 		);
 
-	const core = createCore(devices, panels, {
+	log('Initializing core TRMNL manager.');
+
+	const core = createTrmnlManager(devices, panels, {
 		trmnlApiUri,
 		screenImagePath,
+		referenceImagePath,
 		useSandboxRendering
 	});
+
+	log('Setting up server.');
 
 	const server = fastify({
 		routerOptions : {
@@ -74,14 +85,25 @@ export async function main ()
 		response.code(500).send();
 	});
 
+	log('Setting up TRMNL screen endpoints.');
+
+	const screenImageUri = '/screens';
+
+	server.register(fastifyStatic, {
+		root   : core.screens.getRenderPath(),
+		prefix : screenImageUri
+	});
+
 	log('Setting up TRMNL API endpoints.');
 
-	registerTrmnlEndpoints(server, core);
+	server.register(registerTrmnlEndpoints, {
+		...core, screenImageUri, prefix : '/api'
+	});
 
 	log('Setting up admin API endpoints.');
 
-	registerAdminEndpoints(server, core, {
-		adminApiKeys
+	server.register(registerAdminEndpoints, {
+		...core, adminApiKeys, prefix : '/admin'
 	});
 
 	await server.listen({

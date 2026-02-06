@@ -30,7 +30,7 @@ function renderWifiQrCode ({
 export default class JoinWifi extends Panel
 {
 	static Schema = z.object({
-		message    : z.string().optional(),
+		message    : z.string().trim().optional(),
 		ssid       : z.string(),
 		password   : z.string(),
 		hidden     : z.boolean().default(false),

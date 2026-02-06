@@ -15,6 +15,18 @@ settings:
   # the server if it does not exist.
   screenImagePath: screens
 
+  # Type: String, Required: No, Default: ./uploads
+  #
+  # The path to the directory where the reference screen
+  # images are written to.
+  #
+  # The file path is resolved relative to the location of
+  # configuration file.
+  #
+  # The directory doesn't need to exist, it is created by
+  # the server if it does not exist.
+  referenceImagePath: references
+
   # Type: String, Required: No, Default: https://trmnl.app/api
   #
   # The base URI for the TRMNL API where the server will
@@ -73,6 +85,31 @@ devices:
     screens:
 
       - # Type: String, Required: Yes
+        #
+        # The type indicates how the screen should be
+        # generated. This can take the following values:
+        #   - `composed`
+        #     A screen that is generated on the fly using
+        #     configured panels organised into a layout.
+        #   - `referenced`
+        #     A screen that is already pre-generated and
+        #     uploaded to the server through the screen
+        #     upload API.
+        type: composed
+
+        # Type: Number, Required: No, Default: 300
+        #
+        # The number of seconds that the screen should be
+        # visible for on the device before the next screen
+        # is requested.
+        #
+        # See this as a suggestion for the device. The
+        # device is free to request the next screen whenever
+        # it wants, e.g. when the function button is
+        # pressed.
+        duration: 300
+
+        # Type: String, Required: Yes
         #
         # The layout indicating how the panels will be
         # organized on screen. The available layouts are:
@@ -158,3 +195,22 @@ devices:
                 - piccadilly
                 - dlr
                 - elizabeth
+
+      - type: referenced
+
+        # Type: String, Required: No
+        #
+        # The name of the uploaded image that the screen
+        # will be referencing.
+        image: temperature
+
+        # Type: Number, Required: No, Default: 300
+        #
+        # The number of seconds that the screen should be
+        # visible for on the device before the next screen
+        # is requested.
+        #
+        # If the image you are referencing is uploaded on
+        # a schedule, make sure that this value is
+        # appropriately inline with that schedule time.
+        duration: 300

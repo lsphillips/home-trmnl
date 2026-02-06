@@ -35,7 +35,7 @@ export function respondWithDeviceSetup (response, key, {
 
 export function respondWithDeviceDisplay (response, update, {
 	hash,
-	expiresIn,
+	duration,
 	file,
 	screenImageUri,
 	host
@@ -46,7 +46,7 @@ export function respondWithDeviceDisplay (response, update, {
 		'image_url'         : host + posix.join(screenImageUri, file),
 		'image_url_timeout' : 5,
 		'filename'          : hash,
-		'refresh_rate'      : expiresIn,
+		'refresh_rate'      : duration,
 		'reset_firmware'    : false,
 		'update_firmware'   : update !== null,
 		'firmware_url'      : update === null ? '' : update.url,

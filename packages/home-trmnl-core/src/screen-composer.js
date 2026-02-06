@@ -1,16 +1,13 @@
-import {
-	join
-} from 'node:path';
 import sharp from 'sharp';
 import debug from 'debug';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-const log = debug('home-trmnl:core:screen-renderer');
+const log = debug('home-trmnl:core:screen-composer');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-export async function createTrmnlPng (buffer, path, {
+export async function createTrmnlPng (buffer, {
 	width    = 800,
 	height   = 480,
 	bitDepth = 1
@@ -78,43 +75,36 @@ export async function createTrmnlPng (buffer, path, {
 		}
 	}
 
-	await sharp(Uint8Array.from(dithered), {
+	return sharp(Uint8Array.from(dithered), {
 		raw : { width, height, channels : 1 }
 	})
 		.toColourspace('b-w')
 		.png({
 			colors, palette : false
 		})
-		.toFile(path);
+		.toBuffer();
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-export class ScreenRenderer
+export class ScreenComposer
 {
 	#layoutFactory   = null;
 	#panelRenderer   = null;
 	#htmlRenderer    = null;
-	#screenImagePath = null;
 
-	constructor ({ screenImagePath }, {
+	constructor ({
 		layoutFactory,
 		panelRenderer,
 		htmlRenderer
 	})
 	{
-		this.#screenImagePath = screenImagePath;
-		this.#panelRenderer   = panelRenderer;
-		this.#htmlRenderer    = htmlRenderer;
-		this.#layoutFactory   = layoutFactory;
+		this.#panelRenderer = panelRenderer;
+		this.#htmlRenderer  = htmlRenderer;
+		this.#layoutFactory = layoutFactory;
 	}
 
-	getRenderPath ()
-	{
-		return this.#screenImagePath;
-	}
-
-	async renderScreen (screen, {
+	async composeScreen (screen, {
 		width,
 		height,
 		bitDepth
@@ -130,7 +120,7 @@ export class ScreenRenderer
 		const error = panels
 			.some(panel => panel.error);
 
-		log('Rendering %s x %s screen, with bit depth of %s, using layout `%s`.', width, height, bitDepth, screen.layout);
+		log('Composing %s x %s screen, with bit depth of %s, using layout `%s`.', width, height, bitDepth, screen.layout);
 
 		const html = layout(
 			panels.map(p => p.html)
@@ -143,20 +133,14 @@ export class ScreenRenderer
 
 		log('Converting screen to TRMNL compliant PNG image.');
 
-		const file = `${screen.id}.png`;
-
-		await createTrmnlPng(view, join(this.#screenImagePath, file), {
+		const image = await createTrmnlPng(view, {
 			width,
 			height,
 			bitDepth
 		});
 
-		log('Finished Created screen image file `%s` that should be visible for %s second(s).', file, screen.expiresIn);
-
-		const hash = Date.now().toString();
-
 		return {
-			html, hash, file, error, expiresIn : screen.expiresIn
+			html, image, error
 		};
 	}
 }

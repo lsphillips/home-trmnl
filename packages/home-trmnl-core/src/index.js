@@ -8,8 +8,11 @@ import {
 	DeviceManager
 } from './device-manager.js';
 import {
-	ScreenRenderer
-} from './screen-renderer.js';
+	ScreenComposer
+} from './screen-composer.js';
+import {
+	ScreenManager
+} from './screen-manager.js';
 import {
 	LayoutFactory
 } from './layout-factory.js';
@@ -28,9 +31,10 @@ export {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-export function createCore (devices, panels, {
+export function createTrmnlManager (devices, panels, {
 	trmnlApiUri,
 	screenImagePath,
+	referenceImagePath,
 	useSandboxRendering
 })
 {
@@ -47,16 +51,34 @@ export function createCore (devices, panels, {
 	});
 
 	// Initialize a screen renderer.
-	const screenRenderer = new ScreenRenderer({ screenImagePath }, {
+	const screenManager = new ScreenManager({
+		screenImagePath,
+		referenceImagePath
+	}, {
+		screenComposer : new ScreenComposer({
+			layoutFactory : new LayoutFactory(),
+			panelRenderer : new PanelRenderer(panels),
+			htmlRenderer  : new HtmlRenderer({
+				useSandboxRendering
+			})
+		})
+	});
+
+	return {
+		screens : screenManager,
+		devices : deviceManager
+	};
+}
+
+export function createTrmnlScreenComposer (panels, {
+	useSandboxRendering
+})
+{
+	return new ScreenComposer({
 		layoutFactory : new LayoutFactory(),
 		panelRenderer : new PanelRenderer(panels),
 		htmlRenderer  : new HtmlRenderer({
 			useSandboxRendering
 		})
 	});
-
-	return {
-		screens : screenRenderer,
-		devices : deviceManager
-	};
 }

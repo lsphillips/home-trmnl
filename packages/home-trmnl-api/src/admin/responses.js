@@ -26,3 +26,8 @@ export function respondWithDeviceStatus (response, {
 		error
 	});
 }
+
+export function respondWithScreenUploaded (response)
+{
+	response.status(200).send();
+}

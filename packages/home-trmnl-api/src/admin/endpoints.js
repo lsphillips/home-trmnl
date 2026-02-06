@@ -1,18 +1,20 @@
 import {
-	readDeviceStatusRequest
+	readDeviceStatusRequest,
+	readUploadScreenRequest
 } from './requests.js';
 import {
 	respondWithDeviceNotFound,
 	respondWithNotAuthorized,
-	respondWithDeviceStatus
+	respondWithDeviceStatus,
+	respondWithScreenUploaded
 } from './responses.js';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 export function registerAdminEndpoints (server, {
-	devices
-}, {
-	adminApiKeys = []
+	devices,
+	screens,
+	adminApiKeys
 })
 {
 	function isAuthorizedAdmin (key)
@@ -20,7 +22,11 @@ export function registerAdminEndpoints (server, {
 		return adminApiKeys.includes(key);
 	}
 
-	server.get('/admin/:address/status', async (request, response) =>
+	server.addContentTypeParser('image/png', {
+		parseAs : 'buffer'
+	}, async (_, body) => body);
+
+	server.get('/:address/status', async (request, response) =>
 	{
 		const {
 			address,
@@ -42,5 +48,17 @@ export function registerAdminEndpoints (server, {
 		}
 
 		return respondWithDeviceStatus(response, device);
+	});
+
+	server.post('/screens/:name', async (request, response) =>
+	{
+		const {
+			name,
+			image
+		} = readUploadScreenRequest(request);
+
+		await screens.updateReferenceScreen(name, image);
+
+		respondWithScreenUploaded(response);
 	});
 }

@@ -32,3 +32,17 @@ export function readDeviceStatusRequest ({
 		key, address : params['address']
 	};
 }
+
+export function readUploadScreenRequest ({
+	params,
+	body
+})
+{
+	const name  = params['name'];
+	const image = body;
+
+	return {
+		name,
+		image
+	};
+}

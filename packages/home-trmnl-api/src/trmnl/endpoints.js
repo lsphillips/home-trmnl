@@ -1,4 +1,3 @@
-import fastifyStatic from '@fastify/static';
 import debug from 'debug';
 import {
 	readSetupRequest,
@@ -21,17 +20,11 @@ const log = debug('home-trmnl:api:trmnl');
 
 export function registerTrmnlEndpoints (server, {
 	devices,
-	screens
+	screens,
+	screenImageUri
 })
 {
-	const screenImageUri = '/screens';
-
-	server.register(fastifyStatic, {
-		root   : screens.getRenderPath(),
-		prefix : screenImageUri
-	});
-
-	server.get('/api/setup', async (request, response) =>
+	server.get('/setup', async (request, response) =>
 	{
 		log('Handling request [GET] /api/setup.');
 
@@ -63,7 +56,7 @@ export function registerTrmnlEndpoints (server, {
 		return respondWithDeviceSetup(response, key, device);
 	});
 
-	server.get('/api/display', async (request, response) =>
+	server.get('/display', async (request, response) =>
 	{
 		log('Handling request [GET] /api/display.');
 
@@ -120,7 +113,7 @@ export function registerTrmnlEndpoints (server, {
 		});
 	});
 
-	server.post('/api/log', async (request, response) =>
+	server.post('/log', async (request, response) =>
 	{
 		log('Handling request [GET] /api/log.');
 
