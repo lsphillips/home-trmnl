@@ -20,12 +20,14 @@ export function respondWithDeviceStatus (response, {
 	error
 })
 {
+	const healthy = !error;
+
 	response.status(200).send({
 		address,
 		model,
 		firmware,
 		battery,
-		error
+		healthy
 	});
 }
 
