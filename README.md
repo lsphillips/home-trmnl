@@ -21,7 +21,7 @@ The container has the following volume mounts:
 - `data`\
   This is where you should place your `config.yaml` file, please see [configuration](#configuration).
 
-The configuration file is a [YAML](https://yaml.org/) file, please reference the [config.exmaple.yaml](./config.example.yaml) for the available structure.
+The configuration file is a [YAML](https://yaml.org/) file, please reference the [config.example.yaml](./config.example.yaml) for the available structure.
 
 ## Local Development
 
