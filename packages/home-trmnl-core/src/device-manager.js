@@ -116,6 +116,13 @@ export class DeviceManager
 		});
 	}
 
+	async updateDeviceSignalStrength (address, rssi)
+	{
+		await this.#deviceRepository.updateDevice(address, {
+			rssi
+		});
+	}
+
 	async updateDeviceStatus (address, {
 		error
 	})

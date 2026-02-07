@@ -17,6 +17,7 @@ export function respondWithDeviceStatus (response, {
 	model,
 	firmware,
 	battery,
+	rssi,
 	error
 })
 {
@@ -27,6 +28,7 @@ export function respondWithDeviceStatus (response, {
 		model,
 		firmware,
 		battery,
+		rssi,
 		healthy
 	});
 }

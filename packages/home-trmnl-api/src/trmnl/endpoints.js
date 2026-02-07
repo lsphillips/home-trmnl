@@ -64,6 +64,7 @@ export function registerTrmnlEndpoints (server, {
 			model,
 			firmware,
 			voltage,
+			rssi,
 			address,
 			width,
 			height,
@@ -93,6 +94,7 @@ export function registerTrmnlEndpoints (server, {
 		});
 
 		await devices.updateDeviceBattery(address, voltage);
+		await devices.updateDeviceSignalStrength(address, rssi);
 
 		const screen = await devices
 			.updateDeviceToNextScreen(address);

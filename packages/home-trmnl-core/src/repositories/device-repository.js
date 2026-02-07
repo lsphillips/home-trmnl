@@ -48,6 +48,7 @@ function createDeviceTable (definitions)
 			model    : null,
 			firmware : null,
 			battery  : 0,
+			rssi     : -100,
 			error    : false,
 			screens  : createScreenTable(screens)
 		};
@@ -83,6 +84,7 @@ export class DeviceRepository
 			model,
 			firmware,
 			battery,
+			rssi,
 			bitDepth,
 			autoUpdate,
 			error
@@ -94,6 +96,7 @@ export class DeviceRepository
 			model,
 			firmware,
 			battery,
+			rssi,
 			bitDepth,
 			autoUpdate,
 			error
@@ -136,6 +139,7 @@ export class DeviceRepository
 		model,
 		firmware,
 		battery,
+		rssi,
 		error
 	})
 	{
@@ -164,7 +168,14 @@ export class DeviceRepository
 		{
 			device.battery = battery;
 
-			log('Updating device, with address `%s`, to have battery level `%s`.', address, battery);
+			log('Updating device, with address `%s`, to have battery level `%d%`.', address, battery);
+		}
+
+		if (rssi != null)
+		{
+			device.rssi = rssi;
+
+			log('Updating device, with address `%s`, to have signal strength of `%ddBm`.', address, rssi);
 		}
 
 		if (error != null)

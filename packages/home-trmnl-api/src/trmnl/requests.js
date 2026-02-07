@@ -3,6 +3,7 @@ const KeyHeader            = 'access-token';
 const ModelHeader          = 'model';
 const FirmwareHeader       = 'fw-version';
 const BatteryVoltageHeader = 'battery-voltage';
+const RssiHeader           = 'rssi';
 const WidthHeader          = 'width';
 const HeightHeader         = 'height';
 const Host                 = 'host';
@@ -30,6 +31,9 @@ export function readDisplayRequest ({
 		firmware : headers[FirmwareHeader],
 		voltage  : parseFloat(
 			headers[BatteryVoltageHeader]
+		),
+		rssi     : parseFloat(
+			headers[RssiHeader]
 		),
 		address  : headers[AddressHeader],
 		width    : parseInt(headers[WidthHeader], 10),
