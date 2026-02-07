@@ -1,4 +1,4 @@
-name: publish
+name: Publish
 
 on:
   push:
@@ -12,7 +12,7 @@ jobs:
 
   publish:
 
-    name: Build
+    name: Publish
 
     needs:
       - test
