@@ -21,14 +21,12 @@ The container has the following volume mounts:
 - `data`\
   This is where you should place your `config.yaml` file, please see [configuration](#configuration).
 
-### Configuration
-
 The configuration file is a [YAML](https://yaml.org/) file, please reference the [config.exmaple.yaml](./config.example.yaml) for the available structure.
 
 ## Local Development
 
 > [!NOTE]
-> You will need [Node.js](https://nodejs.org/) v24 (or higher) and [Docker](https://docs.docker.com/) installed.
+> You will need [Node.js](https://nodejs.org/) v24 (or higher), [PNPM](https://pnpm.io/) and [Docker](https://docs.docker.com/) installed.
 
 ### Running
 
