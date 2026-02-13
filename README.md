@@ -1,27 +1,13 @@
 # Home TRMNL
 
+> [!IMPORTANT]
+> This is still a tinkerer's project, still in its infancy and being developed primarily for my needs. Use at your own risk.
+
 A home-made [TRMNL](https://usetrmnl.com/) server that is solely driven by a single configuration file.
 
 ## Getting Started
 
-The server is available as a Docker image, which you can run like so:
-
-``` bash
-docker run -p 1992:1992 -v ./example:/data ghcr.io/lsphillips/home-trmnl-server:latest
-```
-
-### Port
-
-The container exposes port `1992`.
-
-### Volumes
-
-The container has the following volume mounts:
-
-- `data`\
-  This is where you should place your `config.yaml` file.
-
-The configuration file is a [YAML](https://yaml.org/) file, please reference the [config.example.yaml](./config.example.yaml) to understand the structure and configuration options.
+Please refer to the [Getting Started](./docs/getting-started.md) guide in the documentation.
 
 ## Local Development
 

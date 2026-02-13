@@ -1,0 +1,112 @@
+# Configuring Screens
+
+This guide will walk you through defining screens for your TRMNL devices.
+
+## Defining Screens
+
+Screens are defined in the `screens` array of a device entry in your `config.yaml` file:
+
+``` yaml
+devices:
+  - id: living-room
+    address: 8A:3F:CD:91:7B:E4
+    key: 9KJ7T2QZP1H4V8MW3RCD0XY6BNA5FGU
+    screens:
+      - type: composed
+        # ...
+      - type: referenced
+        # ...
+```
+
+Each screen has a `type` property that determines how the screen image is generated. There are two types of screens:
+
+- **Composed** - A screen that is generated on the fly using configured panels organized into a layout.
+- **Referenced** - A screen that references a pre-generated image that has been uploaded to the server.
+
+Both screen types support a `duration` property, which controls how long (in seconds) the screen is displayed on the device before the next screen is requested. If not configured then this defaults to `300` seconds (5 minutes).
+
+> [!NOTE]
+> The order that screens are defined in the `screens` array is the order that they will be cycled through on the device. When the last screen has been displayed, the cycle starts again from the first screen.
+
+## Composed Screens
+
+A `composed` screen is built from one or more panels arranged in a layout. The server renders the panels into an image on the fly each time the device requests the screen.
+
+### Configuration
+
+``` yaml
+- type: composed
+  duration: 300
+  layout: P2L1xR1
+  panels:
+    - name: join-wifi
+      settings:
+        ssid: "Guest Network"
+        password: "Welcome123!"
+        encryption: WPA
+        message: "Scan to connect"
+    - name: tube-status
+      settings:
+        prioritizing:
+          - northern
+          - piccadilly
+```
+
+| Property   | Required | Default | Description                                                                      |
+| ---------- | :------: | ------- | -------------------------------------------------------------------------------- |
+| `type`     | Yes      | -       | Must be `composed`.                                                              |
+| `duration` | No       | `300`   | The number of seconds that the screen should be visible for on the device.       |
+| `layout`   | Yes      | -       | The layout that determines how panels are arranged on the screen.                |
+| `panels`   | Yes      | -       | A collection of panels to render. Each panel has a `name` and `settings` object. |
+
+### Layouts
+
+The `layout` property determines how panels are arranged on the screen. The `P` prefix in the layout name indicates the exact number of panels that the layout supports; the number of panels you provide must match.
+
+| Layout    | Panels | Description                                                  | Reference                                                                          |
+| --------- | :----: | ------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| `P1Full`  | 1      | A single panel taking the full screen.                       | [Full View](https://trmnl.com/framework/docs/view)                                 |
+| `P2L1xR1` | 2      | Two panels side by side, split vertically.                   | [1 Left, 1 Right](https://trmnl.com/framework/docs/mashup#1-left-1-right)          |
+| `P2T1xB1` | 2      | Two panels stacked, split horizontally.                      | [1 Top, 1 Bottom](https://trmnl.com/framework/docs/mashup#1-top-1-bottom)          |
+| `P3L1xR2` | 3      | One panel on the left, two panels stacked on the right.      | [1 Left, 2 Right](https://trmnl.com/framework/docs/mashup#1-left-2-right)          |
+| `P3L2xR1` | 3      | Two panels stacked on the left, one panel on the right.      | [2 Left, 1 Right](https://trmnl.com/framework/docs/mashup#2-left-1-right)          |
+| `P4Grid`  | 4      | Four panels in a 2x2 grid.                                   | [2 x 2 Grid](https://trmnl.com/framework/docs/mashup#2-x-2-grid)                   |
+
+### Panels
+
+Each panel in the `panels` array is an object with a `name` and `settings` property. The `name` identifies the panel type and the `settings` object configures it.
+
+The following panels are available:
+
+| Panel Name     | Description                                           | Guide                                                     |
+| -------------- | ----------------------------------------------------- | --------------------------------------------------------- |
+| `join-wifi`    | Displays a QR code for joining a WiFi network.        | [Join WiFi Panel](./panels/join-wifi-panel.md)            |
+| `tube-status`  | Displays London transport tube line disruptions.      | [Tube Status Panel](./panels/tube-status-panel.md)        |
+
+## Referenced Screens
+
+A `referenced` screen displays a pre-generated image that has been uploaded to the server. This is useful for images that are generated by an external system, such as Home Assistant.
+
+### Configuration
+
+``` yaml
+- type: referenced
+  image: temperature
+  duration: 300
+```
+
+| Property   | Required | Default | Description                                                                    |
+| ---------- | :------: | ------- | ------------------------------------------------------------------------------ |
+| `type`     | Yes      | -       | Must be `referenced`.                                                          |
+| `duration` | No       | `300`   | The number of seconds that the screen should be visible for on the device.     |
+| `image`    | No       | -       | The name of the uploaded image that the screen will reference.                 |
+
+### Uploading Images
+
+The `image` property references the name of an image that has been uploaded to the server via the admin API. Images are uploaded as PNG files using the following endpoint:
+
+```
+POST /admin/screens/{name}
+```
+
+Where `{name}` is the identifier you will use in the `image` property of your screen configuration. For example, make a `POST /admin/screens/temperature` request means you would set `image` to `temperature` in your configuration.
