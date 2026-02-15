@@ -1,7 +1,7 @@
 # Home TRMNL
 
 > [!IMPORTANT]
-> This is still a tinkerer's project, still in its infancy and being developed primarily for my needs. Use at your own risk. A [CHANGELOG](./CHANGELOG.md) is being maintained starting from `v0.5.0`.
+> This is still a tinkerer's project, still in its infancy and being developed primarily for my needs. Use at your own risk. A [CHANGELOG](./CHANGELOG.md) is being maintained starting from `v0.4.3`.
 
 A home-made [TRMNL](https://usetrmnl.com/) server that is solely driven by a single configuration file.
 
