@@ -98,13 +98,9 @@ export class DeviceManager
 		return this.#deviceRepository.updateDeviceToNextScreen(address);
 	}
 
-	async updateDeviceDetails (address, {
-		model,
-		firmware
-	})
+	async updateDeviceFirmware (address, firmware)
 	{
 		await this.#deviceRepository.updateDevice(address, {
-			model,
 			firmware
 		});
 	}

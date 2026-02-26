@@ -51,7 +51,7 @@ export async function main ()
 
 	log('Initializing core TRMNL manager.');
 
-	const core = createTrmnlManager(devices, panels, {
+	const core = await createTrmnlManager(devices, panels, {
 		trmnlApiUri,
 		screenImagePath,
 		referenceImagePath,

@@ -61,7 +61,7 @@ export class ConfigReader
 				key        : z.string().min(16),
 				address    : z.string().trim().length(17),
 				autoUpdate : z.boolean().default(true),
-				bitDepth   : z.number().positive().min(1).refine(n => (n & (n - 1)) === 0).default(1),
+				model      : z.string().trim().min(1),
 				screens    : z.array(
 					z.discriminatedUnion('type', [
 						z.object({

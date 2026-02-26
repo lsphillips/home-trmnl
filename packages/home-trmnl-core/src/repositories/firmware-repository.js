@@ -43,13 +43,13 @@ export class FirmwareRepository
 			return { url, version };
 		}
 
-		const response = await fetch(
-			posix.join(this.#trmnlApiUri, 'firmware/latest')
-		);
+		const endpoint = posix.join(this.#trmnlApiUri, 'firmware/latest');
+
+		const response = await fetch(endpoint);
 
 		if (!response.ok)
 		{
-			log('Failed to retrieve latest firmware location from %s. Received status code %s.', null, null);
+			log('Failed to retrieve latest firmware location from %s. Received status code %s.', endpoint, response.status);
 
 			return null;
 		}

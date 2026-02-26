@@ -71,12 +71,14 @@ devices:
     # updates by the server when available.
     autoUpdate: true
 
-    # Type: String, Required: No, Default: 1
+    # Type: String, Required: Yes
     #
-    # Indicates the bit depth that the device supports,
-    # this also implies the number of colors that the
-    # screen images will contain.
-    bitDepth: 2
+    # Defines the model of the device, which implies
+    # attributes bit-depth, screen size and rotation.
+    #
+    # The value should be a model documented in the TRMNL
+    # style guide: https://trmnl.com/framework/docs/
+    model: TRMNL OG (2-bit)
 
     # Type: Array, Required: Yes
     #

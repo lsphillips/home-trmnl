@@ -1,11 +1,8 @@
 const AddressHeader        = 'id';
 const KeyHeader            = 'access-token';
-const ModelHeader          = 'model';
 const FirmwareHeader       = 'fw-version';
 const BatteryVoltageHeader = 'battery-voltage';
 const RssiHeader           = 'rssi';
-const WidthHeader          = 'width';
-const HeightHeader         = 'height';
 const Host                 = 'host';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -15,7 +12,6 @@ export function readSetupRequest ({
 })
 {
 	return {
-		model    : headers[ModelHeader],
 		firmware : headers[FirmwareHeader],
 		address  : headers[AddressHeader]
 	};
@@ -27,7 +23,6 @@ export function readDisplayRequest ({
 })
 {
 	return {
-		model    : headers[ModelHeader],
 		firmware : headers[FirmwareHeader],
 		voltage  : parseFloat(
 			headers[BatteryVoltageHeader]
@@ -36,8 +31,6 @@ export function readDisplayRequest ({
 			headers[RssiHeader]
 		),
 		address  : headers[AddressHeader],
-		width    : parseInt(headers[WidthHeader], 10),
-		height   : parseInt(headers[HeightHeader], 10),
 		key      : headers[KeyHeader],
 		host     : `${protocol}://${ headers[Host] }`
 	};

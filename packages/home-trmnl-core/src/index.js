@@ -5,6 +5,12 @@ import {
 	FirmwareRepository
 } from './repositories/firmware-repository.js';
 import {
+	ModelRepository
+} from './repositories/model-repository.js';
+import {
+	DeviceRegistrar
+} from './device-registrar.js';
+import {
 	DeviceManager
 } from './device-manager.js';
 import {
@@ -31,7 +37,7 @@ export {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-export function createTrmnlManager (devices, panels, {
+export async function createTrmnlManager (devices, panels, {
 	trmnlApiUri,
 	screenImagePath,
 	referenceImagePath,
@@ -39,9 +45,14 @@ export function createTrmnlManager (devices, panels, {
 })
 {
 	// Initialize data layer.
-	const deviceRepository   = new DeviceRepository(devices);
-	const firmwareRepository = new FirmwareRepository({
-		trmnlApiUri
+	const deviceRepository   = new DeviceRepository();
+	const modelRepository    = new ModelRepository({ trmnlApiUri });
+	const firmwareRepository = new FirmwareRepository({ trmnlApiUri });
+
+	// Initialize device registrar.
+	const deviceRegistrar = new DeviceRegistrar({
+		deviceRepository,
+		modelRepository
 	});
 
 	// Initialize a device manager.
@@ -55,14 +66,16 @@ export function createTrmnlManager (devices, panels, {
 		screenImagePath,
 		referenceImagePath
 	}, {
-		screenComposer : new ScreenComposer({
-			layoutFactory : new LayoutFactory(),
-			panelRenderer : new PanelRenderer(panels),
-			htmlRenderer  : new HtmlRenderer({
-				useSandboxRendering
-			})
+		screenComposer : await createTrmnlScreenComposer(panels, {
+			useSandboxRendering
 		})
 	});
+
+	// Register devices.
+	for (const device of devices)
+	{
+		await deviceRegistrar.register(device);
+	}
 
 	return {
 		screens : screenManager,
@@ -70,7 +83,7 @@ export function createTrmnlManager (devices, panels, {
 	};
 }
 
-export function createTrmnlScreenComposer (panels, {
+export async function createTrmnlScreenComposer (panels, {
 	useSandboxRendering
 })
 {

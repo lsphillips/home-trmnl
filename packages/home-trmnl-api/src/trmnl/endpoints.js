@@ -29,7 +29,6 @@ export function registerTrmnlEndpoints (server, {
 		log('Handling request [GET] /api/setup.');
 
 		const {
-			model,
 			firmware,
 			address
 		} = readSetupRequest(request);
@@ -48,10 +47,7 @@ export function registerTrmnlEndpoints (server, {
 			return respondWithDeviceNotFound(response);
 		}
 
-		await devices.updateDeviceDetails(address, {
-			model,
-			firmware
-		});
+		await devices.updateDeviceFirmware(address, firmware);
 
 		return respondWithDeviceSetup(response, key, device);
 	});
@@ -61,13 +57,10 @@ export function registerTrmnlEndpoints (server, {
 		log('Handling request [GET] /api/display.');
 
 		const {
-			model,
 			firmware,
 			voltage,
 			rssi,
 			address,
-			width,
-			height,
 			key,
 			host
 		} = readDisplayRequest(request);
@@ -86,25 +79,18 @@ export function registerTrmnlEndpoints (server, {
 			return respondWithDeviceNotFound(response);
 		}
 
-		const update = await devices.getDeviceUpdate(address);
-
-		await devices.updateDeviceDetails(address, {
-			model,
-			firmware
-		});
-
+		await devices.updateDeviceFirmware(address, firmware);
 		await devices.updateDeviceBattery(address, voltage);
 		await devices.updateDeviceSignalStrength(address, rssi);
 
 		const screen = await devices
 			.updateDeviceToNextScreen(address);
 
+		const update = await devices
+			.getDeviceUpdate(address);
+
 		const render = await screens
-			.renderScreen(screen, {
-				width,
-				height,
-				bitDepth : device.bitDepth
-			});
+			.renderScreen(screen, device.model);
 
 		await devices.updateDeviceStatus(address, {
 			error : render.error

@@ -104,14 +104,10 @@ export class ScreenComposer
 		this.#layoutFactory = layoutFactory;
 	}
 
-	async composeScreen (screen, {
-		width,
-		height,
-		bitDepth
-	})
+	async composeScreen (screen, model)
 	{
 		const layout = this.#layoutFactory
-			.getLayout(screen.layout);
+			.getLayout(screen.layout, model);
 
 		const panels = await Promise.all(
 			screen.panels.map(p => this.#panelRenderer.renderPanel(p.name, p.settings))
@@ -120,24 +116,17 @@ export class ScreenComposer
 		const error = panels
 			.some(panel => panel.error);
 
-		log('Composing %s x %s screen, with bit depth of %s, using layout `%s`.', width, height, bitDepth, screen.layout);
+		log('Composing %s x %s screen, with bit depth of %s, using layout `%s`.', model.width, model.height, model.bitDepth, screen.layout);
 
 		const html = layout(
 			panels.map(p => p.html)
 		);
 
-		const view = await this.#htmlRenderer.render(html, {
-			width,
-			height
-		});
+		const view = await this.#htmlRenderer.render(html, model);
 
 		log('Converting screen to TRMNL compliant PNG image.');
 
-		const image = await createTrmnlPng(view, {
-			width,
-			height,
-			bitDepth
-		});
+		const image = await createTrmnlPng(view, model);
 
 		return {
 			html, image, error

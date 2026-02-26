@@ -36,11 +36,7 @@ export class ScreenManager
 		return this.#screenImagePath;
 	}
 
-	async renderScreen (screen, {
-		width,
-		height,
-		bitDepth
-	})
+	async renderScreen (screen, model)
 	{
 		let file  = `${screen.id}.png`;
 		let path  = join(this.#screenImagePath, file);
@@ -50,11 +46,8 @@ export class ScreenManager
 		{
 			log('Rendering composed screen consisting of %d panels.', screen.panels.length);
 
-			const composed = await this.#screenComposer.composeScreen(screen, {
-				width,
-				height,
-				bitDepth
-			});
+			const composed = await this.#screenComposer
+				.composeScreen(screen, model);
 
 			log('Finished composing screen, writing the image to %s.', path);
 

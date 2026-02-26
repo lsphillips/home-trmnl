@@ -46,18 +46,18 @@ devices:
     address: XX:XX:XX:XX:XX:XX
     key: LIVING-ROOM-DEVICE-KEY
     autoUpdate: true
-    bitDepth: 2
+    model: TRMNL OG (2-bit)
     screens: []
 ```
 
-| Property     | Required | Default | Description                                                                                         |
-| ------------ | :------: | ------- | --------------------------------------------------------------------------------------------------- |
-| `id`         | Yes      | -       | A friendly ID for the device.                                                                       |
-| `address`    | Yes      | -       | The MAC address of the device.                                                                      |
-| `key`        | Yes      | -       | The API key for the device to authenticate with the server. Must be at least 16 characters.         |
-| `autoUpdate` | No       | `true`  | Whether the device should receive firmware updates from the server when available.                  |
-| `bitDepth`   | No       | `1`     | The bit depth that the device supports, which determines the number of colors in the screen images. |
-| `screens`    | Yes      | -       | The collection of screens for the device. See the screens and panels guide for more details.        |
+| Property     | Required | Default | Description                                                                                   |
+| ------------ | :------: | ------- | --------------------------------------------------------------------------------------------- |
+| `id`         | Yes      | -       | A friendly ID for the device.                                                                 |
+| `address`    | Yes      | -       | The MAC address of the device.                                                                |
+| `key`        | Yes      | -       | The API key for the device to authenticate with the server. Must be at least 16 characters.   |
+| `autoUpdate` | No       | `true`  | Whether the device should receive firmware updates from the server when available.            |
+| `screens`    | Yes      | -       | The collection of screens for the device. See the screens and panels guide for more details.  |
+| `model`      | Yes      | -       | The device model as documented in the [TRMNL Style Guide](https://trmnl.com/framework/docs/). |
 
 ## Onboarding a Device
 
@@ -74,10 +74,9 @@ Add a new entry to the `devices` array in your `config.yaml` file:
 ``` yaml
 devices:
   - id: my-new-device
-    # Replace with your device's MAC address.
-    address: XX:XX:XX:XX:XX:XX
-    # Generate a unique key.
-    key: YOUR-DEVICE-KEY-HERE
+    address: XX:XX:XX:XX:XX:XX # <- Replace with your device's MAC address.
+    key: YOUR-DEVICE-KEY-HERE # <- Generate a unique key.
+    model: TRMNL OG (2-bit)
     screens: []
 ```
 
