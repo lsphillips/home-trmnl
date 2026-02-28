@@ -83,7 +83,7 @@ devices:
     # Type: Number, Required: No, Default: 0
     #
     # Defines the device rotation, relative to the device's
-    # orientation (as defined by the model).
+    # native orientation (as defined by the model).
     #
     # If configured, must either by 0, 90, 180, or 270.
     rotation: 0
