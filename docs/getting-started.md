@@ -50,14 +50,18 @@ devices:
     screens: []
 ```
 
-| Property     | Required | Default | Description                                                                                   |
-| ------------ | :------: | ------- | --------------------------------------------------------------------------------------------- |
-| `id`         | Yes      | -       | A friendly ID for the device.                                                                 |
-| `address`    | Yes      | -       | The MAC address of the device.                                                                |
-| `key`        | Yes      | -       | The API key for the device to authenticate with the server. Must be at least 16 characters.   |
-| `autoUpdate` | No       | `true`  | Whether the device should receive firmware updates from the server when available.            |
-| `screens`    | Yes      | -       | The collection of screens for the device. See the screens and panels guide for more details.  |
-| `model`      | Yes      | -       | The device model as documented in the [TRMNL Style Guide](https://trmnl.com/framework/docs/). |
+| Property     | Required | Default | Description                                                                                                                                                            |
+| ------------ | :------: | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`         | Yes      | -       | A friendly ID for the device.                                                                                                                                          |
+| `address`    | Yes      | -       | The MAC address of the device.                                                                                                                                         |
+| `key`        | Yes      | -       | The API key for the device to authenticate with the server. Must be at least 16 characters.                                                                            |
+| `autoUpdate` | No       | `true`  | Whether the device should receive firmware updates from the server when available.                                                                                     |
+| `screens`    | Yes      | -       | The collection of screens for the device. See the screens and panels guide for more details.                                                                           |
+| `model`      | Yes      | -       | The device model as documented in the [TRMNL Style Guide](https://trmnl.com/framework/docs/). This will determine the screen resolution, scale and native orientation. |
+| `rotation`   | No       | `0`     | Indicates the angle that the decice is physically rotated, clockwise, from the devices native orientation. Can be `0`, `90`, `180` or `270`.                           |
+
+> [!NOTE]
+> The native orientation is the primary orientation of the device, for example the TRMNL OG device has a landscape native orientation whereas the Amazon Kindle Scribe has a portrait native orientation.
 
 ## Onboarding a Device
 

@@ -59,9 +59,10 @@ export class ConfigReader
 			devices : z.array(z.object({
 				id         : z.string().trim().min(1),
 				key        : z.string().min(16),
-				address    : z.string().trim().length(17),
+				address    : z.mac(),
 				autoUpdate : z.boolean().default(true),
 				model      : z.string().trim().min(1),
+				rotation   : z.number().min(0).max(270).multipleOf(90).default(0),
 				screens    : z.array(
 					z.discriminatedUnion('type', [
 						z.object({
@@ -92,7 +93,7 @@ export class ConfigReader
 			settings : z.object({
 				screenImagePath    : z.string().default('screens'),
 				referenceImagePath : z.string().default('references'),
-				trmnlApiUri        : z.string().default('https://trmnl.app/api'),
+				trmnlApiUri        : z.url().default('https://trmnl.app/api'),
 				adminApiKeys       : z.array(
 					z.string().min(16)
 				).min(1)

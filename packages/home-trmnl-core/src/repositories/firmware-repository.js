@@ -1,6 +1,3 @@
-import {
-	posix
-} from 'node:path';
 import debug from 'debug';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -22,7 +19,7 @@ export class FirmwareRepository
 		trmnlApiUri
 	})
 	{
-		this.#trmnlApiUri = trmnlApiUri;
+		this.#trmnlApiUri = trmnlApiUri.replace(/\/$/, '');
 	}
 
 	async getLatestFirmware ()
@@ -43,7 +40,7 @@ export class FirmwareRepository
 			return { url, version };
 		}
 
-		const endpoint = posix.join(this.#trmnlApiUri, 'firmware/latest');
+		const endpoint = this.#trmnlApiUri + '/firmware/latest';
 
 		const response = await fetch(endpoint);
 

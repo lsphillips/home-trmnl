@@ -3,7 +3,7 @@ const KeyHeader            = 'access-token';
 const FirmwareHeader       = 'fw-version';
 const BatteryVoltageHeader = 'battery-voltage';
 const RssiHeader           = 'rssi';
-const Host                 = 'host';
+const HostHeader           = 'host';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -32,7 +32,7 @@ export function readDisplayRequest ({
 		),
 		address  : headers[AddressHeader],
 		key      : headers[KeyHeader],
-		host     : `${protocol}://${ headers[Host] }`
+		host     : `${protocol}://${ headers[HostHeader] }`
 	};
 }
 

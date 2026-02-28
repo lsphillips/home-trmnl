@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## Added
 
 - Added the `model` device configuration that will result in better rendering for officially supported TRMNL devices, as documented in the [TRMNL Styleguide](https://trmnl.com/framework/docs/).
+- Added the `rotation` device configuration that enables different physical device orientations.
 
 ## Removed
 

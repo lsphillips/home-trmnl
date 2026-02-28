@@ -107,7 +107,7 @@ export class LayoutFactory
 {
 	getLayout (name, {
 		styles,
-		landscape
+		orientation
 	})
 	{
 		const layout = Layouts[name];
@@ -116,8 +116,6 @@ export class LayoutFactory
 		{
 			throw new Error(`Layout "${name}" is not recognized.`);
 		}
-
-		const orientation = landscape ? 'screen--landscape' : 'screen--portrait';
 
 		return panels => `<!DOCTYPE>
 			<html>
@@ -131,7 +129,7 @@ export class LayoutFactory
 					<script src="https://usetrmnl.com/js/latest/plugins.js"></script>
 				</head>
 				<body class="environment trmnl">
-					<div class="screen ${ styles.join(' ') } ${ orientation }">
+					<div class="screen ${ styles.join(' ') } screen--${ orientation }">
 						${ layout(panels) }
 					</div>
 				</body>

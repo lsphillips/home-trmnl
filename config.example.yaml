@@ -80,6 +80,14 @@ devices:
     # style guide: https://trmnl.com/framework/docs/
     model: TRMNL OG (2-bit)
 
+    # Type: Number, Required: No, Default: 0
+    #
+    # Defines the device rotation, relative to the device's
+    # orientation (as defined by the model).
+    #
+    # If configured, must either by 0, 90, 180, or 270.
+    rotation: 0
+
     # Type: Array, Required: Yes
     #
     # The collection of screens for the device that

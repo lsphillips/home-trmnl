@@ -38,7 +38,7 @@ export class DeviceRepository
 			rssi,
 			autoUpdate,
 			error,
-			model
+			profile
 		} = device;
 
 		return {
@@ -49,7 +49,7 @@ export class DeviceRepository
 			rssi,
 			autoUpdate,
 			error,
-			model
+			profile
 		};
 	}
 

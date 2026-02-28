@@ -90,7 +90,7 @@ export function registerTrmnlEndpoints (server, {
 			.getDeviceUpdate(address);
 
 		const render = await screens
-			.renderScreen(screen, device.model);
+			.renderScreen(screen, device.profile);
 
 		await devices.updateDeviceStatus(address, {
 			error : render.error

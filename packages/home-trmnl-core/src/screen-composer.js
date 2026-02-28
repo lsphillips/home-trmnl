@@ -8,9 +8,10 @@ const log = debug('home-trmnl:core:screen-composer');
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 export async function createTrmnlPng (buffer, {
-	width    = 800,
-	height   = 480,
-	bitDepth = 1
+	width,
+	height,
+	upsideDowm,
+	bitDepth
 })
 {
 	function clamp (value)
@@ -27,6 +28,7 @@ export async function createTrmnlPng (buffer, {
 		data
 	} = await sharp(buffer)
 		.resize(width, height)
+		.rotate(upsideDowm ? 180 : 0)
 		.greyscale()
 		.raw()
 		.toBuffer({
@@ -104,10 +106,10 @@ export class ScreenComposer
 		this.#layoutFactory = layoutFactory;
 	}
 
-	async composeScreen (screen, model)
+	async composeScreen (screen, profile)
 	{
 		const layout = this.#layoutFactory
-			.getLayout(screen.layout, model);
+			.getLayout(screen.layout, profile);
 
 		const panels = await Promise.all(
 			screen.panels.map(p => this.#panelRenderer.renderPanel(p.name, p.settings))
@@ -116,17 +118,17 @@ export class ScreenComposer
 		const error = panels
 			.some(panel => panel.error);
 
-		log('Composing %s x %s screen, with bit depth of %s, using layout `%s`.', model.width, model.height, model.bitDepth, screen.layout);
+		log('Composing %s x %s screen, with bit depth of %s, using layout `%s`.', profile.width, profile.height, profile.bitDepth, screen.layout);
 
 		const html = layout(
 			panels.map(p => p.html)
 		);
 
-		const view = await this.#htmlRenderer.render(html, model);
+		const view = await this.#htmlRenderer.render(html, profile);
 
 		log('Converting screen to TRMNL compliant PNG image.');
 
-		const image = await createTrmnlPng(view, model);
+		const image = await createTrmnlPng(view, profile);
 
 		return {
 			html, image, error

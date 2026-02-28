@@ -9,6 +9,27 @@ const log = debug('home-trmnl:core:device-registrar');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+function createProfile (model, rotation)
+{
+	const profile = {
+		...model, upsideDowm : false
+	};
+
+	if (
+		(rotation / 90) % 2 === 1
+	)
+	{
+		profile.orientation = model.orientation === 'landscape' ? 'portrait' : 'landscape';
+
+		// Swap.
+		[profile.width, profile.height] = [profile.height, profile.width];
+	}
+
+	profile.upsideDowm = rotation === 180 || rotation === 270;
+
+	return profile;
+}
+
 function createScreen ({
 	type,
 	duration,
@@ -33,16 +54,19 @@ function createDevice ({
 	id,
 	address,
 	key,
+	rotation,
 	autoUpdate,
 	screens
 }, model)
 {
+	const profile = createProfile(model, rotation);
+
 	return {
 		id,
 		address,
 		key,
 		autoUpdate,
-		model,
+		profile,
 		screen   : -1,
 		firmware : null,
 		battery  : 0,

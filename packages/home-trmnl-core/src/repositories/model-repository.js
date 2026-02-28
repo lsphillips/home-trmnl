@@ -1,6 +1,3 @@
-import {
-	posix
-} from 'node:path';
 import debug from 'debug';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -9,61 +6,46 @@ const log = debug('home-trmnl:core:model-repository');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-export class Model
+function mapEntryToModel (entry)
 {
-	#name     = null;
-	#height   = 0;
-	#width    = 0;
-	#bitDepth = 0;
-	#rotation = 0;
-	#styles   = [];
+	let name        = entry['label'],
+	    rotation    = entry['rotation'],
+	    width       = entry['width'],
+	    height      = entry['height'],
+	    bitDepth    = entry['bit_depth'],
+	    css         = entry['css'],
+		styles      = [],
+		orientation = 'landscape';
 
-	constructor ({
+	if (css)
+	{
+		styles = [
+			entry['css']['classes']['device'],
+			entry['css']['classes']['size']
+		];
+	}
+
+	// This means that the device is a native portrait
+	// device, however the API returns the height and
+	// width as though the device was in portrait.
+	if (
+		(rotation / 90) % 2 === 1
+	)
+	{
+		orientation = 'portrait';
+
+		// Swap.
+		[width, height] = [height, width];
+	}
+
+	return {
 		name,
-		height,
 		width,
+		height,
+		orientation,
 		bitDepth,
-		rotation,
 		styles
-	})
-	{
-		this.#name     = name;
-		this.#height   = height;
-		this.#width    = width;
-		this.#bitDepth = bitDepth;
-		this.#rotation = rotation;
-		this.#styles   = styles;
-	}
-
-	get name ()
-	{
-		return this.#name;
-	}
-
-	get height ()
-	{
-		return this.landscape ? this.#height : this.#width;
-	}
-
-	get width ()
-	{
-		return this.landscape ? this.#width : this.#height;
-	}
-
-	get bitDepth ()
-	{
-		return this.#bitDepth;
-	}
-
-	get landscape ()
-	{
-		return (this.#rotation / 90) % 2 === 1;
-	}
-
-	get styles ()
-	{
-		return this.#styles;
-	}
+	};
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -77,14 +59,14 @@ export class ModelRepository
 		trmnlApiUri
 	})
 	{
-		this.#trmnlApiUri = trmnlApiUri;
+		this.#trmnlApiUri = trmnlApiUri.replace(/\/$/, '');
 	}
 
 	async getDeviceModel (name)
 	{
 		if (!this.#models)
 		{
-			const endpoint = posix.join(this.#trmnlApiUri, 'models');
+			const endpoint = this.#trmnlApiUri + '/models';
 
 			log('No models are in memory, loading models from %s.', endpoint);
 
@@ -101,17 +83,7 @@ export class ModelRepository
 				data
 			} = await response.json();
 
-			this.#models = data.map(model => new Model({
-				name     : model['label'],
-				rotation : model['rotation'],
-				width    : model['width'],
-				height   : model['height'],
-				bitDepth : model['bit_depth'],
-				styles   : model.css ? [
-					model['css']['classes']['device'],
-					model['css']['classes']['size']
-				] : []
-			}));
+			this.#models = data.map(entry => mapEntryToModel(entry));
 		}
 
 		return this.#models.find(model => model.name === name) || null;
