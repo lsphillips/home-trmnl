@@ -10,8 +10,8 @@ const log = debug('home-trmnl:core:screen-composer');
 export async function createTrmnlPng (buffer, {
 	width,
 	height,
-	upsideDowm,
-	bitDepth
+	rotation,
+	model
 })
 {
 	function clamp (value)
@@ -28,7 +28,6 @@ export async function createTrmnlPng (buffer, {
 		data
 	} = await sharp(buffer)
 		.resize(width, height)
-		.rotate(upsideDowm ? 180 : 0)
 		.greyscale()
 		.raw()
 		.toBuffer({
@@ -36,7 +35,7 @@ export async function createTrmnlPng (buffer, {
 		});
 
 	const dithered = new Float32Array(data);
-	const colors   = 1 << bitDepth;
+	const colors   = 1 << model.bitDepth;
 	const delta    = 255 / (colors - 1);
 
 	// Apply Floyd Steinberg Dither.
@@ -80,6 +79,7 @@ export async function createTrmnlPng (buffer, {
 	return sharp(Uint8Array.from(dithered), {
 		raw : { width, height, channels : 1 }
 	})
+		.rotate(360 - rotation)
 		.toColourspace('b-w')
 		.png({
 			colors, palette : false

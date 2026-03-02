@@ -11,21 +11,29 @@ const log = debug('home-trmnl:core:device-registrar');
 
 function createProfile (model, rotation)
 {
+	const {
+		width,
+		height,
+		orientation
+	} = model;
+
 	const profile = {
-		...model, upsideDowm : false
+		width,
+		height,
+		orientation,
+		model,
+		rotation
 	};
 
 	if (
 		(rotation / 90) % 2 === 1
 	)
 	{
-		profile.orientation = model.orientation === 'landscape' ? 'portrait' : 'landscape';
+		profile.orientation = orientation === 'landscape' ? 'portrait' : 'landscape';
 
 		// Swap.
 		[profile.width, profile.height] = [profile.height, profile.width];
 	}
-
-	profile.upsideDowm = rotation === 180 || rotation === 270;
 
 	return profile;
 }

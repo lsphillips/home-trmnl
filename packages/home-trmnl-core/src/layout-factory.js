@@ -106,7 +106,7 @@ const Layouts = {
 export class LayoutFactory
 {
 	getLayout (name, {
-		styles,
+		model,
 		orientation
 	})
 	{
@@ -129,7 +129,7 @@ export class LayoutFactory
 					<script src="https://usetrmnl.com/js/latest/plugins.js"></script>
 				</head>
 				<body class="environment trmnl">
-					<div class="screen ${ styles.join(' ') } screen--${ orientation }">
+					<div class="screen ${ model.styles.join(' ') } screen--${ orientation }">
 						${ layout(panels) }
 					</div>
 				</body>
