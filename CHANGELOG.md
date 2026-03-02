@@ -4,18 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## 0.5.1 - 2026-03-02
 
-## Fixed
+### Fixed
 
 - Fixed how the rotation is applied.
 
 ## 0.5.0 - 2026-02-28
 
-## Added
+### Added
 
 - Added the `model` device configuration that will result in better rendering for officially supported TRMNL devices, as documented in the [TRMNL Styleguide](https://trmnl.com/framework/docs/).
 - Added the `rotation` device configuration that enables different physical device orientations.
 
-## Removed
+### Removed
 
 - Removed the `bitDepth` device configuration in favour of the new `model` property.
 
