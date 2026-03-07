@@ -14,6 +14,7 @@ function mapEntryToModel (entry)
 	    height      = entry['height'],
 	    bitDepth    = entry['bit_depth'],
 	    css         = entry['css'],
+		scale       = entry['scale_factor'],
 		styles      = [],
 		orientation = 'landscape';
 
@@ -43,6 +44,7 @@ function mapEntryToModel (entry)
 		width,
 		height,
 		orientation,
+		scale,
 		bitDepth,
 		styles
 	};
