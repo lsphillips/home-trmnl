@@ -108,8 +108,7 @@ export class LayoutFactory
 	getLayout (name, {
 		model,
 		bitDepth,
-		orientation,
-		scale
+		orientation
 	})
 	{
 		const layout = Layouts[name];
@@ -130,11 +129,6 @@ export class LayoutFactory
 					<link rel="stylesheet" href="https://usetrmnl.com/css/latest/plugins.css" />
 					<script src="https://usetrmnl.com/js/latest/plugins.js"></script>
 				</head>
-				<style>
-					.home-trmnl-screen {
-						--ui-scale: ${scale};
-					}
-				</style>
 				<body class="environment trmnl">
 					<div class="screen ${ model.styles.join(' ') } screen--${ bitDepth }bit screen--${ orientation } home-trmnl-screen">
 						${ layout(panels) }
