@@ -14,7 +14,8 @@ function createProfile (model, rotation)
 	const {
 		width,
 		height,
-		orientation
+		orientation,
+		bitDepth
 	} = model;
 
 	const profile = {
@@ -22,7 +23,8 @@ function createProfile (model, rotation)
 		height,
 		orientation,
 		model,
-		rotation
+		rotation,
+		bitDepth
 	};
 
 	if (
