@@ -105,10 +105,15 @@ export class DeviceManager
 		});
 	}
 
-	async updateDeviceBattery (address, voltage)
+	async updateDeviceBattery (address, battery)
 	{
+		if (battery.type !== 'voltage' && battery.type !== 'percentage')
+		{
+			throw new Error(`Battery update of type '${battery.type}' is not recognized.`);
+		}
+
 		await this.#deviceRepository.updateDevice(address, {
-			battery : voltageToPercentage(voltage)
+			battery : battery.type === 'voltage' ? voltageToPercentage(battery.voltage) : battery.percentage
 		});
 	}
 

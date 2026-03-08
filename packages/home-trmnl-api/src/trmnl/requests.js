@@ -1,9 +1,39 @@
-const AddressHeader        = 'id';
-const KeyHeader            = 'access-token';
-const FirmwareHeader       = 'fw-version';
-const BatteryVoltageHeader = 'battery-voltage';
-const RssiHeader           = 'rssi';
-const HostHeader           = 'host';
+const AddressHeader           = 'id';
+const KeyHeader               = 'access-token';
+const FirmwareHeader          = 'fw-version';
+const BatteryVoltageHeader    = 'battery-voltage';
+const BatteryPercentageHeader = 'battery-percentage';
+const RssiHeader              = 'rssi';
+const HostHeader              = 'host';
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+function readBatteryLevel (headers)
+{
+	const percentage = parseFloat(
+		headers[BatteryPercentageHeader]
+	);
+
+	if (percentage)
+	{
+		return {
+			type : 'percentage', percentage
+		};
+	}
+
+	const voltage = parseFloat(
+		headers[BatteryVoltageHeader]
+	);
+
+	if (voltage)
+	{
+		return {
+			type : 'voltage', voltage
+		};
+	}
+
+	return null;
+}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -24,9 +54,7 @@ export function readDisplayRequest ({
 {
 	return {
 		firmware : headers[FirmwareHeader],
-		voltage  : parseFloat(
-			headers[BatteryVoltageHeader]
-		),
+		battery  : readBatteryLevel(headers),
 		rssi     : parseFloat(
 			headers[RssiHeader]
 		),

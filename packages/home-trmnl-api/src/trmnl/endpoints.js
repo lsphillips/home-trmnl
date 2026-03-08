@@ -58,7 +58,7 @@ export function registerTrmnlEndpoints (server, {
 
 		const {
 			firmware,
-			voltage,
+			battery,
 			rssi,
 			address,
 			key,
@@ -79,9 +79,20 @@ export function registerTrmnlEndpoints (server, {
 			return respondWithDeviceNotFound(response);
 		}
 
-		await devices.updateDeviceFirmware(address, firmware);
-		await devices.updateDeviceBattery(address, voltage);
-		await devices.updateDeviceSignalStrength(address, rssi);
+		if (firmware)
+		{
+			await devices.updateDeviceFirmware(address, firmware);
+		}
+
+		if (battery)
+		{
+			await devices.updateDeviceBattery(address, battery);
+		}
+
+		if (rssi)
+		{
+			await devices.updateDeviceSignalStrength(address, rssi);
+		}
 
 		const screen = await devices
 			.updateDeviceToNextScreen(address);
