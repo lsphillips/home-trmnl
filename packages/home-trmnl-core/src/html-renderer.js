@@ -9,6 +9,29 @@ const log = debug('home-trmnl:core:html-renderer');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+function setupPageRenderingMonitoring (page)
+{
+	const requests = new WeakMap();
+
+	page.on('request', req => requests.set(
+		req, Date.now()
+	))
+		.on('requestfinished', req =>
+		{
+			const time = Date.now() - requests.get(req);
+
+			log('Request for %s finished in %dms.', req.url(), time);
+		})
+		.on('requestfailed', request =>
+		{
+			const time = Date.now() - requests.get(req);
+
+			log('Request for %s failed after %dms. %s', request.url(), time, request.failure()?.errorText);
+		});
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 export class HtmlRenderer
 {
 	#browser             = null;
@@ -40,7 +63,10 @@ export class HtmlRenderer
 		log('Creating a new browser page.');
 
 		const page = await this.#browser
-			.newPage();
+			.newPage()
+
+		// Monitor.
+		setupPageRenderingMonitoring(page);
 
 		try
 		{
