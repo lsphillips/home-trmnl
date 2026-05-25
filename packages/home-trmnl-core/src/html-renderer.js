@@ -28,7 +28,7 @@ export class HtmlRenderer
 	{
 		if (!this.#browser?.connected)
 		{
-			log('Browser not started or is not connected.');
+			log('Browser not started or is not connected. Launching.');
 
 			await this.#browser?.close();
 
@@ -37,21 +37,34 @@ export class HtmlRenderer
 			});
 		}
 
+		log('Creating a new browser page.');
+
 		const page = await this.#browser
 			.newPage();
 
-		await page.setViewport({
-			width,
-			height
-		});
+		try
+		{
+			log('Setting browser page size to %s x %s', width, height);
 
-		await page.setContent(html);
+			await page.setViewport({
+				width,
+				height
+			});
 
-		const screenshot = await page
-			.screenshot();
+			log('Rendering HTML content in browser page.');
 
-		await page.close();
+			await page.setContent(html);
 
-		return Buffer.from(screenshot);
+			log('Capturing screenshot of browser page.');
+
+			const screenshot = await page
+				.screenshot();
+
+			return Buffer.from(screenshot);
+		}
+		finally
+		{
+			await page.close();
+		}
 	}
 }
