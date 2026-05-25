@@ -20,7 +20,7 @@ function renderWifiQrCode ({
 		encoding : 'byte',
 		version  : 5,
 		mask     : 0,
-		border   : 0,
+		border   : 2,
 		scale    : 8
 	});
 }
