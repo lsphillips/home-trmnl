@@ -1,7 +1,7 @@
 {
     "name" : "home-trmnl",
 
-    "version" : "0.4.0",
+    "version" : "0.5.3",
 
     "type" : "module",
 
@@ -29,8 +29,7 @@
 
     "devDependencies" :
     {
-        "eslint" : "9.39.2",
-        "eslint-config-protect-me-from-my-stupidity" : "16.0.0",
+        "oxlint" : "1.66.0",
         "cheerio" : "1.2.0",
         "msw" : "2.12.9",
         "sharp" : "0.34.5"
@@ -38,7 +37,7 @@
 
     "scripts" :
     {
-        "lint" : "eslint \"**/*.js\"",
+        "lint" : "oxlint",
         "test" : "pnpm recursive run test",
         "start" : "pnpm --filter home-trmnl-api run start"
     },

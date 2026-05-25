@@ -3,6 +3,7 @@ packages:
 
 onlyBuiltDependencies:
   - puppeteer
+  - sharp
 
 registry: https://registry.npmjs.org/
 
