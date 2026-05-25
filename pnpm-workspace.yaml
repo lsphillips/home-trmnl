@@ -1,10 +1,13 @@
 packages:
   - packages/*
 
-onlyBuiltDependencies:
-  - puppeteer
-  - sharp
-
 registry: https://registry.npmjs.org/
 
 engineStrict: true
+
+allowBuilds:
+  msw: false
+  puppeteer: true
+  sharp: true
+
+minimumReleaseAge: 0
